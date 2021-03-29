@@ -1,0 +1,151 @@
+[{
+        "question": "Who is the 'Modern Love' rock star singer?",
+        "imageUrl": "https://i.postimg.cc/nc0Bvm6W/celebrity1.png",
+        "one": "Jimi Hendrix",
+        "two": "David Bowie",
+        "three": "Jim Morrison",
+        "four": "Elvis Presley",
+        "correctAnswer": 2,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the celebrity below?",
+        "imageUrl": "https://i.postimg.cc/V6qb50qD/celebrity2.png",
+        "one": "Elton John",
+        "two": "Eric Clapton",
+        "three": "John Lennon",
+        "four": "Freddie Mercury",
+        "correctAnswer": 1,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is known for this iconic dance?",
+        "imageUrl": "https://i.postimg.cc/KcTg1BYF/celebrity3.png",
+        "one": "Jung Kook",
+        "two": "PSY",
+        "three": "Michael Jackson",
+        "four": "Ciara",
+        "correctAnswer": 3,
+        "userAnswer": 0
+    },
+    {
+        "question": "Which wrestler is known for the 'You can't see me' phrase?",
+        "imageUrl": "https://i.postimg.cc/CxXvsbb7/celebrity4.png",
+        "one": "The Undertaker",
+        "two": "John Cena",
+        "three": "Tripple H",
+        "four": "Ray Mysterio",
+        "correctAnswer": 2,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the actress in Iron Man 3 movie?",
+        "imageUrl": "https://i.postimg.cc/B6GMdsY1/celebrity5.png",
+        "one": "Fan Bingbing",
+        "two": "Scarlett Johansson",
+        "three": "Michelle Obama",
+        "four": "Liu Yifei",
+        "correctAnswer": 1,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the popular singer?",
+        "imageUrl": "https://i.postimg.cc/63LYKSgb/celebrity6.png",
+        "one": "Beyonce",
+        "two": "Taylor Swift",
+        "three": "Jeniffer Lopez",
+        "four": "Ariana Grande",
+        "correctAnswer": 2,
+        "userAnswer": 0
+    },
+    {
+        "question": "What is this Chinese billionaires's native name?",
+        "imageUrl": "https://i.postimg.cc/s2WT61cr/celebrity7.png",
+        "one": "Ma Yun",
+        "two": "Ma Huateng",
+        "three": "Jack Ma",
+        "four": "Xu Jiayin",
+        "correctAnswer": 1,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the basketball player below?",
+        "imageUrl": "https://i.postimg.cc/VkdGtK05/celebrity8.png",
+        "one": "Paul Gasol",
+        "two": "Shaquille O'Neal",
+        "three": "Kobe Bryant",
+        "four": "LeBron James",
+        "correctAnswer": 4,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the popular 007 actor?",
+        "imageUrl": "https://i.postimg.cc/vH8SYYQr/celebrity9.png",
+        "one": "James Bond",
+        "two": "Captain America",
+        "three": "Han Solo",
+        "four": "Van Damme",
+        "correctAnswer": 1,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the ruler of United Kingdom shown below?",
+        "imageUrl": "https://i.postimg.cc/d3snV6Ks/celebrity10.png.png",
+        "one": "Queen Elizabeth I",
+        "two": "Queen Elizabeth II",
+        "three": "Victoria Secret",
+        "four": "Queen Victoria I",
+        "correctAnswer": 2,
+        "userAnswer": 0
+    },
+    {
+        "question": "He is the most notable scientist.",
+        "imageUrl": "https://i.postimg.cc/QMT8hggj/celebrity11.png",
+        "one": "Alexander Grahamberg",
+        "two": "Nikola Tesla",
+        "three": "Albert Einstein",
+        "four": "Isaac Newton",
+        "correctAnswer": 3,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the billionaire investing in space exploration?",
+        "imageUrl": "https://i.postimg.cc/CMjRj0qw/celebrity12.png",
+        "one": "Bill Gates",
+        "two": "Oprah Winfrey",
+        "three": "Jeff Bezoz",
+        "four": "Elon Musk",
+        "correctAnswer": 4,
+        "userAnswer": 0
+    },
+    {
+        "question": "He was an anti-apatheid revolutionary leader.",
+        "imageUrl": "https://i.postimg.cc/5yqj15VX/celebrity13.png",
+        "one": "Nelson Mandela",
+        "two": "Mother Teresa",
+        "three": "Mahatma Gandhi",
+        "four": "Benjamin Franklin",
+        "correctAnswer": 1,
+        "userAnswer": 0
+    },
+    {
+        "question": "Who is the popular footballer below?",
+        "imageUrl": "https://i.postimg.cc/j2rCGgGV/celebrity14.png",
+        "one": "Lionel Messi",
+        "two": "Kante Ngolo",
+        "three": "Christiano Ronaldo",
+        "four": "David Beckham",
+        "correctAnswer": 3,
+        "userAnswer": 0
+    },
+    {
+        "question": "What is the name of this popular movie character?",
+        "imageUrl": "https://i.postimg.cc/sg8jkHhn/celebrity15.png",
+        "one": "Groot",
+        "two": "Thanos",
+        "three": "Hulk",
+        "four": "Captain America",
+        "correctAnswer": 2,
+        "userAnswer": 0
+    }
+]
