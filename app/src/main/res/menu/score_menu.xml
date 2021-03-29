@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SolutionActivity">
+
+    <item
+        android:id="@+id/backButton"
+        android:icon="@drawable/back_icon"
+        app:showAsAction="ifRoom"
+        android:title="@string/back"/>
+</menu>

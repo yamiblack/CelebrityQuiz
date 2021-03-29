@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Titles/Utility -->
+    <string name="app_name">Celebrity Quiz</string>
+    <string name="back" />
+    <string name="settings" />
+
+    <string name="settingsTitle">Level of Difficulty</string>
+    <string name="level1">Level One</string>
+    <string name="level2">level Two</string>
+    <string name="level3">level Three</string>
+
+    <string name="timeTitle">Choose Countdown</string>
+    <string name="seconds30">30 Seconds</string>
+    <string name="seconds60">60 Seconds</string>
+    <string name="seconds90">90 Seconds</string>
+
+    <string name="scoreContent">This is your score</string>
+    <string name="scoreHeader">Score</string>
+
+    <string name="textTime">30</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="submit">Submit</string>
+    <string name="update">Update from Internet</string>
+    <string name="startQuiz">Start Quiz</string>
+</resources>

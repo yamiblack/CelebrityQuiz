@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".MainActivity">
+
+    <!-- Level of Difficulty -->
+    <ImageView
+        android:id="@+id/levelBackground"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/image_shape_gray"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/levelHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/settingsTitle"
+        app:layout_constraintStart_toStartOf="@+id/levelBackground"
+        app:layout_constraintTop_toTopOf="@+id/levelBackground" />
+
+    <RadioGroup
+        android:id="@+id/levelRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/levelBackground"
+        app:layout_constraintTop_toBottomOf="@+id/levelHeader">
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level1" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level2" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level3" />
+    </RadioGroup>
+
+    <!-- Time -->
+    <ImageView
+        android:id="@+id/timeBackground"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/image_shape_gray"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/timeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/timeTitle"
+        app:layout_constraintStart_toStartOf="@+id/timeBackground"
+        app:layout_constraintTop_toTopOf="@+id/timeBackground" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/timeBackground"
+        app:layout_constraintTop_toBottomOf="@+id/timeHeader">
+
+        <RadioButton
+            android:id="@+id/radioButton30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seconds30" />
+
+        <RadioButton
+            android:id="@+id/radioButton60"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seconds60" />
+
+        <RadioButton
+            android:id="@+id/radioButton90"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seconds90" />
+    </RadioGroup>
+
+    <ProgressBar
+        android:id="@+id/progressBarDownload"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/levelBackground" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_rounded"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:onClick="onButtonUpdate"
+        android:text="@string/update"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/levelBackground" />
+
+
+    <Button
+        android:id="@+id/buttonStartQuiz"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded"
+        android:elevation="2dp"
+        android:gravity="center"
+        android:enabled="false"
+        android:onClick="onButtonStartQuiz"
+        android:text="@string/startQuiz"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
