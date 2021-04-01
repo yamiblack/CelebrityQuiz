@@ -2,34 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.celebrityquiz">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:icon="@mipmap/ic_logo"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_logo_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:allowBackup="true"
         android:fullBackupContent="true"
-        android:allowBackup="true">
+        android:icon="@mipmap/ic_logo1"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_logo1_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-        <activity android:name="com.example.celebrityquiz.MainActivity"/>
+        <activity android:name="com.example.celebrityquiz.MainActivity" />
 
 
         <activity
             android:name="com.example.celebrityquiz.QuizActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity">
-        </activity>
+            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
 
         <activity
             android:name="com.example.celebrityquiz.SolutionActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity">
-        </activity>
+            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
