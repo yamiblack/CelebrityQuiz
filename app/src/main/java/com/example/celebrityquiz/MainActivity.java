@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public int level;
     public int seconds;
 
+    private long backKeyPressedTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void onButtonUpdate(View view) {
-        if(downloadTask == null) {
+        if (downloadTask == null) {
             // Import data from internet
             String jsonUrl = "https://api.jsonbin.io/b/5e8f60bb172eb6438960f731";
             downloadTask = new DownloadTask(downloadListener, this);
@@ -104,17 +106,34 @@ public class MainActivity extends AppCompatActivity {
 
     // Start QuizActivity with user settings/choices
     public void onButtonStartQuiz(View view) {
-        if(radioButtonLevelOne.isChecked()) level = 1;
-        if(radioButtonLevelTwo.isChecked()) level = 2;
-        if(radioButtonLevelThree.isChecked()) level = 3;
+        if (radioButtonLevelOne.isChecked()) level = 1;
+        if (radioButtonLevelTwo.isChecked()) level = 2;
+        if (radioButtonLevelThree.isChecked()) level = 3;
 
-        if(radioButton30.isChecked()) seconds = 30;
-        if(radioButton60.isChecked()) seconds = 60;
-        if(radioButton90.isChecked()) seconds = 90;
-        
+        if (radioButton30.isChecked()) seconds = 30;
+        if (radioButton60.isChecked()) seconds = 60;
+        if (radioButton90.isChecked()) seconds = 90;
+
         Intent intent = new Intent(this, QuizActivity.class);
         intent.putExtra("level", level);
         intent.putExtra("seconds", seconds);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+            super.onBackPressed();
+            moveTaskToBack(true);
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
+        }
+
     }
 }

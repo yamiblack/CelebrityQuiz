@@ -8,6 +8,13 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="colorPrimaryDark">#E18A47</item>
+    </style>
+
     <style name="HorizontalDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
