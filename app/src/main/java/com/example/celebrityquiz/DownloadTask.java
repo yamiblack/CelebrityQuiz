@@ -3,8 +3,10 @@ package com.example.celebrityquiz;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
@@ -49,13 +51,16 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
             File directory = context.getFilesDir();
             file = new File(directory, fileName);
 
-            if(file.exists()) {
+            file.mkdir();
+            file.createNewFile();
+
+            if (file.exists()) {
                 file.delete(); // Clear available files
                 downloadedLength = 0;
             }
 
             long contentLength = getContentLength(downloadUrl);
-            if(contentLength == 0) return TYPE_FAILED;
+            if (contentLength == 0) return TYPE_FAILED;
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -73,7 +78,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
             while ((len = inputStream.read(b)) != -1) {
                 if (isCanceled) {
                     return TYPE_CANCELED;
-                } else if(isPaused) {
+                } else if (isPaused) {
                     return TYPE_PAUSED;
                 } else {
                     total += len;
@@ -87,7 +92,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
             return TYPE_SUCCESS;
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (inputStream != null) {
                     inputStream.close();
@@ -106,7 +111,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
     }
 
     @Override
-    protected void onProgressUpdate(Integer... values){
+    protected void onProgressUpdate(Integer... values) {
         int progress = values[0];
         if (progress > lastProgress) {
             downloadListener.onProgress(progress);

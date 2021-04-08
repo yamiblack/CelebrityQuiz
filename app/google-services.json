@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "289362740389",
+    "project_id": "celebrity-quiz-9a0c2",
+    "storage_bucket": "celebrity-quiz-9a0c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289362740389:android:eebd7039ae50b509c6794c",
+        "android_client_info": {
+          "package_name": "com.example.celebrityquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289362740389-v8e62e0hjs1lskmjlt6acntar5np30qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzqmRu2KzP6Knfc-or5A5X8wHsCSQK6BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289362740389-v8e62e0hjs1lskmjlt6acntar5np30qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

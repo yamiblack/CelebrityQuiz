@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <!-- Level of Difficulty -->
@@ -30,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarebold"
         android:text="@string/settingsTitle"
         app:layout_constraintStart_toStartOf="@+id/levelBackground"
         app:layout_constraintTop_toTopOf="@+id/levelBackground" />
@@ -47,18 +47,21 @@
             android:id="@+id/radioButtonLevelOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/level1" />
 
         <RadioButton
             android:id="@+id/radioButtonLevelTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/level2" />
 
         <RadioButton
             android:id="@+id/radioButtonLevelThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/level3" />
     </RadioGroup>
 
@@ -81,6 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarebold"
         android:text="@string/timeTitle"
         app:layout_constraintStart_toStartOf="@+id/timeBackground"
         app:layout_constraintTop_toTopOf="@+id/timeBackground" />
@@ -98,18 +102,21 @@
             android:id="@+id/radioButton30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/seconds30" />
 
         <RadioButton
             android:id="@+id/radioButton60"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/seconds60" />
 
         <RadioButton
             android:id="@+id/radioButton90"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
             android:text="@string/seconds90" />
     </RadioGroup>
 
@@ -130,6 +137,7 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/button_rounded"
         android:elevation="2dp"
+        android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
         android:onClick="onButtonUpdate"
         android:text="@string/update"
@@ -146,8 +154,9 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button_rounded"
         android:elevation="2dp"
-        android:gravity="center"
         android:enabled="false"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
         android:onClick="onButtonStartQuiz"
         android:text="@string/startQuiz"
         android:textAllCaps="false"
