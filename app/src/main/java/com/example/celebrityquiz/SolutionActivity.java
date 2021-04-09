@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.celebrityquiz.R;
+import com.example.celebrityquiz.SolutionAdapter;
+import com.example.celebrityquiz.Quiz;
+
 import java.util.List;
 import java.util.Objects;
 

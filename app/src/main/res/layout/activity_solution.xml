@@ -25,7 +25,7 @@
         android:contentDescription="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/button_rounded" />
+        app:srcCompat="@drawable/button_orange_rounded" />
 
     <!-- Score view divider -->
     <View
