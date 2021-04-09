@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton radioButton90;
     private ProgressBar progressBarDownload;
     private Button buttonStartQuiz;
+    private Button buttonStartWordQuiz;
     public int level;
     public int seconds;
 
@@ -54,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         // Define Update and Starting buttons
         Button buttonUpdate = findViewById(R.id.buttonUpdate);
         buttonStartQuiz = findViewById(R.id.buttonStartQuiz);
+        buttonStartWordQuiz = findViewById(R.id.buttonStartWordQuiz);
         buttonUpdate.setEnabled(true);
         buttonStartQuiz.setEnabled(false);
+        buttonStartWordQuiz.setEnabled(false);
         downloadTask = null; // Always initialize task to null
     }
 
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             downloadTask = null;
             progressBarDownload.setProgress(progressBarDownload.getMax());
             buttonStartQuiz.setEnabled(true); // Enable Start button when download is successful
+            buttonStartWordQuiz.setEnabled(true);
         }
 
         @Override
@@ -115,6 +119,21 @@ public class MainActivity extends AppCompatActivity {
         if (radioButton90.isChecked()) seconds = 90;
 
         Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("level", level);
+        intent.putExtra("seconds", seconds);
+        startActivity(intent);
+    }
+
+    public void onButtonStartWordQuiz(View view) {
+        if (radioButtonLevelOne.isChecked()) level = 1;
+        if (radioButtonLevelTwo.isChecked()) level = 2;
+        if (radioButtonLevelThree.isChecked()) level = 3;
+
+        if (radioButton30.isChecked()) seconds = 30;
+        if (radioButton60.isChecked()) seconds = 60;
+        if (radioButton90.isChecked()) seconds = 90;
+
+        Intent intent = new Intent(this, WordQuizActivity.class);
         intent.putExtra("level", level);
         intent.putExtra("seconds", seconds);
         startActivity(intent);

@@ -164,4 +164,21 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
 
+    <Button
+        android:id="@+id/buttonStartWordQuiz"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded"
+        android:elevation="2dp"
+        android:enabled="false"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
+        android:onClick="onButtonStartWordQuiz"
+        android:text="Start Word Quiz"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonStartQuiz" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
