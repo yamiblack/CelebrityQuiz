@@ -169,7 +169,7 @@
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_rounded"
+        android:background="@drawable/button_orange_rounded"
         android:elevation="2dp"
         android:enabled="false"
         android:fontFamily="@font/nanumsquarebold"
