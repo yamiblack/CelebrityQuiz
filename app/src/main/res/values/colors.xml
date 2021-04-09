@@ -11,5 +11,6 @@
     <color name="colorOnBackground">#000000</color>
     <color name="colorCorrect">#0BA512</color>
     <color name="colorWrong">#F44336</color>
+    <color name="colorMain">#EF8633</color>
     <color name="customDisabled">#565656</color>
 </resources>

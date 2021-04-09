@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/button_rounded"
+        android:background="@drawable/button_orange_rounded"
         android:elevation="2dp"
         android:fontFamily="@font/nanumsquarebold"
         android:onClick="onButtonPrevious"
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
-        android:background="@drawable/button_rounded"
+        android:background="@drawable/button_orange_rounded"
         android:elevation="2dp"
         android:fontFamily="@font/nanumsquarebold"
         android:onClick="onButtonNext"
@@ -100,7 +100,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/button_rounded"
+        android:background="@drawable/button_orange_rounded"
         android:elevation="2dp"
         android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
@@ -120,7 +120,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSubmit"
-        app:srcCompat="@drawable/button_rounded" />
+        app:srcCompat="@drawable/button_orange_rounded" />
 
     <!-- Timer -->
     <TextView
