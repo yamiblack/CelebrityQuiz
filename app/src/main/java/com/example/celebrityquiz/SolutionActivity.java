@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,13 +24,13 @@ public class SolutionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solution);
 
-        // Define Navigation
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Results");
-        }
+//        // Define Navigation
+//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle("Results");
+//        }
 
         // Interface instance to get values from QuizActivity
         int scoreValue = getIntent().getIntExtra("score", 0);
@@ -62,5 +63,12 @@ public class SolutionActivity extends AppCompatActivity{
 
         // display well done image if user gets all correct
         if (score == 5) imageView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

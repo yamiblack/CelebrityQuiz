@@ -11,9 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/icon_logo_with_letter">
-
-    </ImageView>
+        android:background="@drawable/icon_logo_with_letter" />
 
 
     <LinearLayout

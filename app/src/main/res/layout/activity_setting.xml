@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".SettingActivity">
+
+    <!-- Level of Difficulty -->
+    <ImageView
+        android:id="@+id/levelBackground"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/image_shape_gray"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/levelHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:text="난이도를 선택해주세요."
+        app:layout_constraintStart_toStartOf="@+id/levelBackground"
+        app:layout_constraintTop_toTopOf="@+id/levelBackground" />
+
+    <RadioGroup
+        android:id="@+id/levelRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/levelBackground"
+        app:layout_constraintTop_toBottomOf="@+id/levelHeader">
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="쉬움"
+            android:theme="@style/OrangeRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="보통"
+            android:theme="@style/OrangeRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButtonLevelThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="어려움"
+            android:theme="@style/OrangeRadioButton" />
+    </RadioGroup>
+
+    <!-- Time -->
+    <ImageView
+        android:id="@+id/timeBackground"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/image_shape_gray"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/timeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:text="시간을 선택해주세요."
+        app:layout_constraintStart_toStartOf="@+id/timeBackground"
+        app:layout_constraintTop_toTopOf="@+id/timeBackground" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/timeBackground"
+        app:layout_constraintTop_toBottomOf="@+id/timeHeader">
+
+        <RadioButton
+            android:id="@+id/radioButton30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="30초"
+            android:theme="@style/OrangeRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton60"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="60초"
+            android:theme="@style/OrangeRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButton90"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="90초"
+            android:theme="@style/OrangeRadioButton" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/gameTypeBackground"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/image_shape_gray"
+        android:contentDescription="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/levelBackground"
+        tools:ignore="MissingConstraints,UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/gameTypeHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:text="게임 유형을 선택해주세요."
+        app:layout_constraintStart_toStartOf="@+id/gameTypeBackground"
+        app:layout_constraintTop_toTopOf="@+id/gameTypeBackground" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupGameType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/gameTypeBackground"
+        app:layout_constraintTop_toBottomOf="@+id/gameTypeHeader">
+
+        <RadioButton
+            android:id="@+id/radioButtonMultipleChoice"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="객관식"
+            android:theme="@style/OrangeRadioButton" />
+
+        <RadioButton
+            android:id="@+id/radioButtonWordQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsquareregular"
+            android:text="워드 퀴즈"
+            android:theme="@style/OrangeRadioButton" />
+
+    </RadioGroup>
+
+    <ProgressBar
+        android:id="@+id/progressBarDownload"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:progressTint="@color/colorMain"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTypeBackground" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_orange_rounded"
+        android:elevation="2dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
+        android:onClick="onButtonUpdate"
+        android:text="게임 설정 저장"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameTypeBackground" />
+
+    <Button
+        android:id="@+id/buttonLogOut"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_orange_rounded"
+        android:elevation="2dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
+        android:text="로그아웃"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

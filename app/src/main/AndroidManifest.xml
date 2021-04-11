@@ -14,27 +14,50 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.example.celebrityquiz.MainActivity" />
-        <activity android:name="com.example.celebrityquiz.LogInActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name="com.example.celebrityquiz.SignUpActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+        <activity
+            android:name="com.example.celebrityquiz.LogInActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+        <activity
+            android:name="com.example.celebrityquiz.SignUpActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.MainActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.GlobalRankingActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.MyPageActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.IncorrectNoteActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.SettingActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
 
 
         <activity
-            android:name="com.example.celebrityquiz.QuizActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
+            android:name="com.example.celebrityquiz.MultipleChoiceActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name="com.example.celebrityquiz.SolutionActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name="com.example.celebrityquiz.WordQuizActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <activity
             android:name="com.example.celebrityquiz.WordSolutionActivity"
-            android:parentActivityName="com.example.celebrityquiz.MainActivity"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name=".SplashActivity"

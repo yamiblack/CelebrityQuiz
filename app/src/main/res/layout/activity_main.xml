@@ -1,184 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainContent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@color/colorMain"
+    android:orientation="vertical">
 
-    <!-- Level of Difficulty -->
     <ImageView
-        android:id="@+id/levelBackground"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/image_shape_gray"
-        android:contentDescription="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/icon_logo_with_letter" />
 
-    <TextView
-        android:id="@+id/levelHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/nanumsquarebold"
-        android:text="@string/settingsTitle"
-        app:layout_constraintStart_toStartOf="@+id/levelBackground"
-        app:layout_constraintTop_toTopOf="@+id/levelBackground" />
 
-    <RadioGroup
-        android:id="@+id/levelRadioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/levelBackground"
-        app:layout_constraintTop_toBottomOf="@+id/levelHeader">
-
-        <RadioButton
-            android:id="@+id/radioButtonLevelOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/level1" />
-
-        <RadioButton
-            android:id="@+id/radioButtonLevelTwo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/level2" />
-
-        <RadioButton
-            android:id="@+id/radioButtonLevelThree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/level3" />
-    </RadioGroup>
-
-    <!-- Time -->
-    <ImageView
-        android:id="@+id/timeBackground"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/image_shape_gray"
-        android:contentDescription="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute" />
-
-    <TextView
-        android:id="@+id/timeHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/nanumsquarebold"
-        android:text="@string/timeTitle"
-        app:layout_constraintStart_toStartOf="@+id/timeBackground"
-        app:layout_constraintTop_toTopOf="@+id/timeBackground" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@+id/timeBackground"
-        app:layout_constraintTop_toBottomOf="@+id/timeHeader">
-
-        <RadioButton
-            android:id="@+id/radioButton30"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/seconds30" />
-
-        <RadioButton
-            android:id="@+id/radioButton60"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/seconds60" />
-
-        <RadioButton
-            android:id="@+id/radioButton90"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumsquareregular"
-            android:text="@string/seconds90" />
-    </RadioGroup>
-
-    <ProgressBar
-        android:id="@+id/progressBarDownload"
-        style="?android:attr/progressBarStyleHorizontal"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/levelBackground" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <Button
-        android:id="@+id/buttonUpdate"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/button_orange_rounded"
-        android:elevation="2dp"
-        android:fontFamily="@font/nanumsquarebold"
-        android:gravity="center"
-        android:onClick="onButtonUpdate"
-        android:text="@string/update"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/levelBackground" />
+        <Button
+            android:id="@+id/btn_gameStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_white_rounded"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="게임 시작"
+            android:textColor="@color/colorMain" />
+
+        <Button
+            android:id="@+id/btn_GlobalRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_white_rounded"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="글로벌 랭킹"
+            android:textColor="@color/colorMain" />
+
+        <Button
+            android:id="@+id/btn_myPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_white_rounded"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="마이페이지"
+            android:textColor="@color/colorMain" />
+
+        <Button
+            android:id="@+id/btn_IncorrectNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_white_rounded"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="오답노트"
+            android:textColor="@color/colorMain" />
+
+        <Button
+            android:id="@+id/btn_gameSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/button_white_rounded"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="게임 설정"
+            android:textColor="@color/colorMain" />
 
 
-    <Button
-        android:id="@+id/buttonStartQuiz"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_orange_rounded"
-        android:elevation="2dp"
-        android:enabled="false"
-        android:fontFamily="@font/nanumsquarebold"
-        android:gravity="center"
-        android:onClick="onButtonStartQuiz"
-        android:text="@string/startQuiz"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonStartWordQuiz"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_orange_rounded"
-        android:elevation="2dp"
-        android:enabled="false"
-        android:fontFamily="@font/nanumsquarebold"
-        android:gravity="center"
-        android:onClick="onButtonStartWordQuiz"
-        android:text="Start Word Quiz"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartQuiz" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

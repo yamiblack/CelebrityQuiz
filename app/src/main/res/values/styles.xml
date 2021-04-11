@@ -8,6 +8,15 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="OrangeThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorMain</item>
+        <item name="colorPrimaryDark">@color/colorMain</item>
+    </style>
+
+    <style name="OrangeRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorMain</item>
+        <item name="colorControlNormal">@color/colorMain</item>
+    </style>
 
     <style name="HorizontalDivider">
         <item name="android:layout_width">match_parent</item>

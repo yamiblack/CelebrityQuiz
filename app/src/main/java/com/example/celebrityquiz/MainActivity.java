@@ -1,142 +1,116 @@
 package com.example.celebrityquiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Declare Variables
-    private RadioButton radioButtonLevelOne;
-    private RadioButton radioButtonLevelTwo;
-    private RadioButton radioButtonLevelThree;
-    private RadioButton radioButton30;
-    private RadioButton radioButton60;
-    private RadioButton radioButton90;
-    private ProgressBar progressBarDownload;
-    private Button buttonStartQuiz;
-    private Button buttonStartWordQuiz;
-    public int level;
-    public int seconds;
+    private Context context = this;
 
     private long backKeyPressedTime = 0;
 
+    private Button btnGameStart;
+    private Button btnGlobalRanking;
+    private Button btnMyPage;
+    private Button btnIncorrectNote;
+    private Button btnGameSettings;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); 
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Define Level views
-        radioButtonLevelOne = findViewById(R.id.radioButtonLevelOne);
-        radioButtonLevelTwo = findViewById(R.id.radioButtonLevelTwo);
-        radioButtonLevelThree = findViewById(R.id.radioButtonLevelThree);
-        radioButtonLevelOne.setChecked(true);
-        radioButtonLevelTwo.setChecked(false);
-        radioButtonLevelThree.setChecked(false);
+        btnGameStart = (Button) findViewById(R.id.btn_gameStart);
+        btnGlobalRanking = (Button) findViewById(R.id.btn_GlobalRanking);
+        btnMyPage = (Button) findViewById(R.id.btn_myPage);
+        btnIncorrectNote = (Button) findViewById(R.id.btn_IncorrectNote);
+        btnGameSettings = (Button) findViewById(R.id.btn_gameSettings);
 
-        // Define Time views
-        radioButton30 = findViewById(R.id.radioButton30);
-        radioButton60 = findViewById(R.id.radioButton60);
-        radioButton90 = findViewById(R.id.radioButton90);
-        radioButton30.setChecked(true);
-        radioButton60.setChecked(false);
-        radioButton90.setChecked(false);
+        btnGameStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                int level = intent.getIntExtra("level", 1);
+                int seconds = intent.getIntExtra("seconds", 30);
+                int gameType = intent.getIntExtra("gameType", 1);
+                int settings = intent.getIntExtra("settings", 0);
 
-        // Define Download views
-        progressBarDownload = findViewById(R.id.progressBarDownload);
-        progressBarDownload.setMax(100);
+                String string = null;
 
-        // Define Update and Starting buttons
-        Button buttonUpdate = findViewById(R.id.buttonUpdate);
-        buttonStartQuiz = findViewById(R.id.buttonStartQuiz);
-        buttonStartWordQuiz = findViewById(R.id.buttonStartWordQuiz);
-        buttonUpdate.setEnabled(true);
-        buttonStartQuiz.setEnabled(false);
-        buttonStartWordQuiz.setEnabled(false);
-        downloadTask = null; // Always initialize task to null
-    }
+                try {
+                    FileInputStream fileInputStream = openFileInput("myJson");
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    string = stringBuilder.toString();
 
-    private DownloadTask downloadTask;
+                    if (gameType == 1) {
+                        if(settings == 0) {
+                            Toast.makeText(getApplicationContext(), "게임 설정을 하지 않아 기본 모드로 실행됩니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        intent = new Intent(context, MultipleChoiceActivity.class);
+                    } else {
+                        intent = new Intent(context, WordQuizActivity.class);
+                    }
+                    intent.putExtra("level", level);
+                    intent.putExtra("seconds", seconds);
+                    intent.putExtra("string", string);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
 
-    // Define Download methods
-    private DownloadListener downloadListener = new DownloadListener() {
-        @Override
-        public void onProgress(int progress) {
-            progressBarDownload.setProgress(progress);
-        }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        @Override
-        public void onSuccess() {
-            downloadTask = null;
-            progressBarDownload.setProgress(progressBarDownload.getMax());
-            buttonStartQuiz.setEnabled(true); // Enable Start button when download is successful
-            buttonStartWordQuiz.setEnabled(true);
-        }
+        btnGlobalRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), GlobalRankingActivity.class));
+            }
+        });
 
-        @Override
-        public void onFailed() {
-            downloadTask = null;
-            //when download failed, close the foreground notification and create a new one about the failure
-            Toast.makeText(getApplicationContext(), "Download Failed", Toast.LENGTH_SHORT).show();
-        }
+        btnMyPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MyPageActivity.class));
+            }
+        });
 
-        @Override
-        public void onPaused() {
-            downloadTask = null;
-            Toast.makeText(getApplicationContext(), "Paused", Toast.LENGTH_SHORT).show();
-        }
+        btnIncorrectNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), IncorrectNoteActivity.class));
+            }
+        });
 
-        @Override
-        public void onCanceled() {
-            downloadTask = null;
-            Toast.makeText(getApplicationContext(), "Canceled", Toast.LENGTH_SHORT).show();
-        }
-    };
+        btnGameSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+            }
+        });
 
-    public void onButtonUpdate(View view) {
-        if (downloadTask == null) {
-            // Import data from internet
-            String jsonUrl = "https://api.jsonbin.io/b/5e8f60bb172eb6438960f731";
-            downloadTask = new DownloadTask(downloadListener, this);
-            downloadTask.execute(jsonUrl);
-        }
-    }
 
-    // Start QuizActivity with user settings/choices
-    public void onButtonStartQuiz(View view) {
-        if (radioButtonLevelOne.isChecked()) level = 1;
-        if (radioButtonLevelTwo.isChecked()) level = 2;
-        if (radioButtonLevelThree.isChecked()) level = 3;
-
-        if (radioButton30.isChecked()) seconds = 30;
-        if (radioButton60.isChecked()) seconds = 60;
-        if (radioButton90.isChecked()) seconds = 90;
-
-        Intent intent = new Intent(this, QuizActivity.class);
-        intent.putExtra("level", level);
-        intent.putExtra("seconds", seconds);
-        startActivity(intent);
-    }
-
-    public void onButtonStartWordQuiz(View view) {
-        if (radioButtonLevelOne.isChecked()) level = 1;
-        if (radioButtonLevelTwo.isChecked()) level = 2;
-        if (radioButtonLevelThree.isChecked()) level = 3;
-
-        if (radioButton30.isChecked()) seconds = 30;
-        if (radioButton60.isChecked()) seconds = 60;
-        if (radioButton90.isChecked()) seconds = 90;
-
-        Intent intent = new Intent(this, WordQuizActivity.class);
-        intent.putExtra("level", level);
-        intent.putExtra("seconds", seconds);
-        startActivity(intent);
     }
 
     @Override

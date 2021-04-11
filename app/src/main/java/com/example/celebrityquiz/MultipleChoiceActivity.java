@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QuizActivity extends AppCompatActivity {
+public class MultipleChoiceActivity extends AppCompatActivity {
 
     // Declare variables
     private List<Quiz> quizList;
@@ -51,7 +52,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         // Hide toolbar
-        Objects.requireNonNull(getSupportActionBar()).hide();
+//        Objects.requireNonNull(getSupportActionBar()).hide();
 
         // Define Activity views
         questionView = findViewById(R.id.celebrityQuestion);
@@ -102,24 +103,25 @@ public class QuizActivity extends AppCompatActivity {
 
         // Access intent interface and get variables
         Intent intent = getIntent();
-        int level = intent.getIntExtra("level", 0);
+        int level = intent.getIntExtra("level", 1);
         seconds = intent.getIntExtra("seconds", 30);
-        String string = null;
+        String string = intent.getStringExtra("string");
+//        String string = null;
 
         // Safely read data from saved file
-        try {
-            FileInputStream fileInputStream = openFileInput("myJson");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-            string = stringBuilder.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            FileInputStream fileInputStream = openFileInput("myJson");
+//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            StringBuilder stringBuilder = new StringBuilder();
+//            String line;
+//            while ((line = bufferedReader.readLine()) != null) {
+//                stringBuilder.append(line);
+//            }
+//            string = stringBuilder.toString();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<Quiz>>(){}.getType();
@@ -152,7 +154,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stopTimer();
-                Intent i = new Intent(QuizActivity.this, SolutionActivity.class);
+                Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -174,7 +176,7 @@ public class QuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent i = new Intent(QuizActivity.this, SolutionActivity.class);
+                Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -276,5 +278,13 @@ public class QuizActivity extends AppCompatActivity {
             if (quizList.get(i).userAnswer == quizList.get(i).correctAnswer) score++;
         }
         return score;
+    }
+
+    @Override
+    public void onBackPressed() {
+        countDownTimer.cancel();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

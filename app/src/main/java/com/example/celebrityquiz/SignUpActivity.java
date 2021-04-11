@@ -65,7 +65,7 @@ public class SignUpActivity extends Activity {
 
 
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
-//
+
             if (passwordCheck.equals(password)) {
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
