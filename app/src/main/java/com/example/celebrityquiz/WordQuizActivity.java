@@ -55,6 +55,8 @@ public class WordQuizActivity extends AppCompatActivity {
     private String answerText = "";
     private char[] answerArr;
 
+    private List<String> userAnswerList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -120,6 +122,8 @@ public class WordQuizActivity extends AppCompatActivity {
         buttonPrevious.setEnabled(false); // Disable previous button when current index is 0
 
         // answerText 생성
+        userAnswerList = new ArrayList<>();
+
         answerArr = getCurrentAnswer(currentQuestion).toCharArray();
         createAnswerText(answerArr.length);
 
@@ -136,15 +140,18 @@ public class WordQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stopTimer();
 
+                userAnswerList.add(answerText);
                 if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
                     quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
                 }
 
-                Intent i = new Intent(WordQuizActivity.this, SolutionActivity.class);
+                Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
+                ArrayList<String> answerList = new ArrayList<>(userAnswerList);
                 i.putExtra("quizList", list);
+                i.putExtra("userAnswerList", answerList);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }
@@ -162,11 +169,19 @@ public class WordQuizActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent i = new Intent(WordQuizActivity.this, SolutionActivity.class);
+
+                userAnswerList.add(answerText);
+                if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
+                    quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
+                }
+
+                Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
+                ArrayList<String> answerList = new ArrayList<>(userAnswerList);
                 i.putExtra("quizList", list);
+                i.putExtra("userAnswerList", answerList);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }
@@ -182,12 +197,18 @@ public class WordQuizActivity extends AppCompatActivity {
 
     // Pre-define new views before setting previous question as current question, for index < 0
     public void onButtonPrevious(View view) {
+
         if (indexCurrentQuestion != 0) {
+            int size = this.userAnswerList.size();
+            size = size - 1;
+            this.userAnswerList.remove(size);
+
             indexCurrentQuestion--;
             if (indexCurrentQuestion == 0) buttonPrevious.setEnabled(false);
             if (indexCurrentQuestion != (quizList.size() - 1)) buttonNext.setEnabled(true);
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);
+
             answerArr = getCurrentAnswer(currentQuestion).toCharArray();
             createAnswerText(answerArr.length);
             setButton(answerArr);
@@ -199,7 +220,7 @@ public class WordQuizActivity extends AppCompatActivity {
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
         if (indexCurrentQuestion != (quizList.size() - 1)) {
-
+            this.userAnswerList.add(answerText);
             if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
                 quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
             }
@@ -295,6 +316,7 @@ public class WordQuizActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < 20; i++) {
+            btn[i].setEnabled(true);
             btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -302,8 +324,10 @@ public class WordQuizActivity extends AppCompatActivity {
                         if (v.getId() == btn[i].getId())
                             if (cntText > 17)
                                 break;
-                            else
+                            else {
                                 view[cntText].setText(btn[i].getText());
+                                btn[i].setEnabled(false);
+                            }
                     }
                     answerText = answerText + view[cntText].getText().toString();
                     cntText++;

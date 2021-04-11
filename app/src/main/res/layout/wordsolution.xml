@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Question view -->
+    <TextView
+        android:id="@+id/celebrityQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:textStyle="bold" />
+
+    <!-- Celebrity image view -->
+    <ImageView
+        android:id="@+id/celebrityImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/image_shape_orange"
+        android:contentDescription="@null"
+        android:elevation="3dp"
+        tools:ignore="UnusedAttribute" />
+
+    <!-- Radio group view -->
+
+    <!-- CorrectAnswer view -->
+    <TextView
+        android:id="@+id/correctAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/horizontalDivider"
+        style="@style/HorizontalDivider" />
+
+</LinearLayout>
