@@ -16,7 +16,7 @@
         <shape
             android:shape="rectangle">
             <solid
-                android:color="@color/colorAccentDisabled"> </solid>
+                android:color="@color/colorButtonDisabled"> </solid>
             <corners
                 android:radius="10dp"> </corners>
         </shape>

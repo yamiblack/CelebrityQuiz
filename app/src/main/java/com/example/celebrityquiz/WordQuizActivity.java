@@ -299,7 +299,7 @@ public class WordQuizActivity extends AppCompatActivity {
         return correctAnswer;
     }
 
-    private void setButton(char[] answerArr) {
+    private void setButton(final char[] answerArr) {
         for (int i = 0; i < answerArr.length; i++)
             btnArr[i] = answerArr[i];
 
@@ -322,15 +322,13 @@ public class WordQuizActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     for (int i = 0; i < 20; i++) {
                         if (v.getId() == btn[i].getId())
-                            if (cntText > 17)
-                                break;
-                            else {
+                            if (cntText < answerArr.length) {
                                 view[cntText].setText(btn[i].getText());
                                 btn[i].setEnabled(false);
+                                answerText = answerText + view[cntText].getText().toString();
+                                cntText++;
                             }
                     }
-                    answerText = answerText + view[cntText].getText().toString();
-                    cntText++;
                 }
             });
         }
@@ -347,5 +345,4 @@ public class WordQuizActivity extends AppCompatActivity {
         }
         return arr;
     }
-
 }
