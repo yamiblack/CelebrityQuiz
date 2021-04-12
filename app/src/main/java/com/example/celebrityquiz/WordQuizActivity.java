@@ -54,6 +54,7 @@ public class WordQuizActivity extends AppCompatActivity {
     private char[] btnArr = new char[20];
     private String answerText = "";
     private char[] answerArr;
+    private List<String> correctAnswerList;
 
     private List<String> userAnswerList;
 
@@ -68,7 +69,7 @@ public class WordQuizActivity extends AppCompatActivity {
         // Define Activity views
         questionView = findViewById(R.id.celebrityQuestion);
         imageView = findViewById(R.id.celebrityImage);
-        ;
+
         textTime = findViewById(R.id.textTime);
 
         // Define button views
@@ -114,6 +115,10 @@ public class WordQuizActivity extends AppCompatActivity {
             quizList = list.subList(10, 15);
         }
 
+        correctAnswerList = new ArrayList<>();
+        for(int i = 0; i<quizList.size(); i++)
+            correctAnswerList.add(getCurrentAnswer(quizList.get(i)));
+
         textContainer = findViewById(R.id.answerLayout);
 
         // initialise and set for each index in current activity as current question
@@ -151,8 +156,10 @@ public class WordQuizActivity extends AppCompatActivity {
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
                 ArrayList<String> answerList = new ArrayList<>(userAnswerList);
+                ArrayList<String> correctAnswer = new ArrayList<>(correctAnswerList);
                 i.putExtra("quizList", list);
                 i.putExtra("userAnswerList", answerList);
+                i.putExtra("correctAnswerList", correctAnswer);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }
@@ -181,8 +188,10 @@ public class WordQuizActivity extends AppCompatActivity {
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
                 ArrayList<String> answerList = new ArrayList<>(userAnswerList);
+                ArrayList<String> correctAnswer = new ArrayList<>(correctAnswerList);
                 i.putExtra("quizList", list);
                 i.putExtra("userAnswerList", answerList);
+                i.putExtra("correctAnswerList", correctAnswer);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }

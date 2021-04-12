@@ -36,6 +36,7 @@ public class WordSolutionActivity extends AppCompatActivity{
         int scoreValue = getIntent().getIntExtra("score", 0);
         List<Quiz> quizList = (List<Quiz>) getIntent().getSerializableExtra("quizList");
         List<String> userAnswerText = (List<String>) getIntent().getSerializableExtra("userAnswerList");
+        List<String> correctAnswerList = (List<String>) getIntent().getSerializableExtra("correctAnswerList");
         // Set view and display scoreValue
         TextView scoreView = findViewById(R.id.scoreTextView);
         scoreView.setText(String.valueOf(scoreValue));
@@ -49,7 +50,7 @@ public class WordSolutionActivity extends AppCompatActivity{
 
         // RecycleView definitions
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        WordSolutionAdapter wordSolutionAdapter = new WordSolutionAdapter(quizList, this, userAnswerText);
+        WordSolutionAdapter wordSolutionAdapter = new WordSolutionAdapter(quizList, this, userAnswerText, correctAnswerList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(wordSolutionAdapter);
     }

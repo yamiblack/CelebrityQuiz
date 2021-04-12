@@ -20,13 +20,15 @@ import java.util.List;
 public class WordSolutionAdapter extends RecyclerView.Adapter {
     private List<Quiz> quizList;
     private List<String> userAnswerText;
+    private List<String> correctAnswer;
     private Context context;
 
     // Constructor to initialize all arrayList
-    WordSolutionAdapter(List<Quiz> quizList, Context context, List<String> userAnswerText) {
+    WordSolutionAdapter(List<Quiz> quizList, Context context, List<String> userAnswerText, List<String> correctAnswer) {
         this.quizList = quizList;
         this.userAnswerText = userAnswerText;
         this.context = context;
+        this.correctAnswer = correctAnswer;
     }
 
     @NonNull
@@ -45,6 +47,7 @@ public class WordSolutionAdapter extends RecyclerView.Adapter {
         // Define recycler views
         TextView viewQuestion = viewHolder.itemView.findViewById(R.id.celebrityQuestion);
         TextView viewCorrectAnswer = viewHolder.itemView.findViewById(R.id.correctAnswer);
+        TextView viewUserAnswer = viewHolder.itemView.findViewById(R.id.userAnswer);
         ImageView imageView = viewHolder.itemView.findViewById(R.id.celebrityImage);
 
         viewHolder.itemView.findViewById(R.id.horizontalDivider);
@@ -52,6 +55,7 @@ public class WordSolutionAdapter extends RecyclerView.Adapter {
         // Format recycler view content
         if (!quizList.isEmpty()) {
             Quiz quiz = quizList.get(position);
+            String correctAns = correctAnswer.get(position);
             String userAnswer = "";
 
             if (!(userAnswerText.isEmpty()))
@@ -59,7 +63,8 @@ public class WordSolutionAdapter extends RecyclerView.Adapter {
                     userAnswer = userAnswerText.get(position);
 
             viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
-            viewCorrectAnswer.setText(userAnswer);
+            viewUserAnswer.setText(userAnswer);
+            viewCorrectAnswer.setText(correctAns);
             Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);
 
             // This is crucial for Marking system
@@ -68,11 +73,12 @@ public class WordSolutionAdapter extends RecyclerView.Adapter {
              * userAnswer is wrong, mark userAnswer red, locate
              * correctAnswer and mark it green.
              */
+            viewCorrectAnswer.setTextColor(Color.parseColor("#FF0BA512"));
             if (quiz.userAnswer == quiz.correctAnswer) {
-                viewCorrectAnswer.setTextColor(Color.parseColor("#FF0BA512"));
+                viewUserAnswer.setTextColor(Color.parseColor("#FF0BA512"));
 
             } else {
-                viewCorrectAnswer.setTextColor(Color.RED);
+                viewUserAnswer.setTextColor(Color.RED);
             }
         }
     }
