@@ -3,7 +3,10 @@ package com.example.celebrityquiz;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -45,7 +48,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private Button buttonNext;
     private TextView textTime;
     private CountDownTimer countDownTimer;
-
+    private ImageView[] heart = new ImageView[3];;
+    private int heartCnt = 0;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -63,7 +67,9 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         radioButtonThree = findViewById(R.id.radioButtonThree);
         radioButtonFour = findViewById(R.id.radioButtonFour);
         textTime = findViewById(R.id.textTime);
-
+        heart[0] = findViewById(R.id.heart1);
+        heart[1] = findViewById(R.id.heart2);
+        heart[2] = findViewById(R.id.heart3);
         // setOnClickListener and set checked onClick for each button
         radioButtonOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,34 +237,78 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
         if(indexCurrentQuestion != (quizList.size() - 1)) {
-            indexCurrentQuestion++;
-            if(indexCurrentQuestion == (quizList.size() - 1)) buttonNext.setEnabled(false);
-            if(indexCurrentQuestion != 0) buttonPrevious.setEnabled(true);
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);
 
-            radioGroup = findViewById(R.id.celebrityOption);
-            if(currentQuestion.userAnswer == 0) radioGroup.clearCheck();
-            else {
-                switch (currentQuestion.userAnswer) {
-                    case 1: {
-                        radioGroup.check(R.id.radioButtonOne);
-                        break;
-                    }
-                    case 2: {
-                        radioGroup.check(R.id.radioButtonTwo);
-                        break;
-                    }
-                    case 3: {
-                        radioGroup.check(R.id.radioButtonThree);
-                        break;
-                    }
-                    case 4: {
-                        radioGroup.check(R.id.radioButtonFour);
-                        break;
+            if (currentQuestion.userAnswer == currentQuestion.correctAnswer) {
+                indexCurrentQuestion++;
+                if (indexCurrentQuestion == (quizList.size() - 1)) buttonNext.setEnabled(false);
+                if (indexCurrentQuestion != 0) buttonPrevious.setEnabled(true);
+                currentQuestion = quizList.get(indexCurrentQuestion);
+                currentQuestionView(currentQuestion);
+
+                radioGroup = findViewById(R.id.celebrityOption);
+                if (currentQuestion.userAnswer == 0) radioGroup.clearCheck();
+                else {
+                    switch (currentQuestion.userAnswer) {
+                        case 1: {
+                            radioGroup.check(R.id.radioButtonOne);
+                            break;
+                        }
+                        case 2: {
+                            radioGroup.check(R.id.radioButtonTwo);
+                            break;
+                        }
+                        case 3: {
+                            radioGroup.check(R.id.radioButtonThree);
+                            break;
+                        }
+                        case 4: {
+                            radioGroup.check(R.id.radioButtonFour);
+                            break;
+                        }
                     }
                 }
             }
+            else {
+                heartCounter();
+            }
+        }
+    }
+
+    private void heartCounter() {
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        switch (this.heartCnt){
+            case 0: {
+                heart[0].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                break;
+            }
+            case 1: {
+                heart[1].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                heart[1].startAnimation(shake);
+                break;
+            }
+            case 2: {
+                heart[2].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                heart[1].startAnimation(shake);
+                heart[2].startAnimation(shake);
+                break;
+            }
+        }
+        heartCnt++;
+
+        if(heartCnt == 3 ) {
+            stopTimer();
+            Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
+            i.putExtra("score", getScore());
+            // Change List to ArrayList to accommodate subList
+            ArrayList<Quiz> list = new ArrayList<>(quizList);
+            i.putExtra("quizList", list);
+            i.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+            startActivity(i);
         }
     }
 

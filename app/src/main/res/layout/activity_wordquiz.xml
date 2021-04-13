@@ -19,6 +19,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/heart1"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="2dp"
+        android:background="@drawable/icon_heart_enable"
+        app:layout_constraintTop_toBottomOf="@id/celebrityQuestion"
+        app:layout_constraintEnd_toEndOf="@id/heart2"/>
+
+    <ImageView
+        android:id="@+id/heart2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="2dp"
+        android:background="@drawable/icon_heart_enable"
+        app:layout_constraintTop_toBottomOf="@id/celebrityQuestion"
+        app:layout_constraintEnd_toEndOf="@id/heart3"/>
+
+    <ImageView
+        android:id="@+id/heart3"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="2dp"
+        android:background="@drawable/icon_heart_enable"
+        app:layout_constraintTop_toBottomOf="@id/celebrityQuestion"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
     <!-- Celebrity image view -->
     <ImageView
         android:id="@+id/celebrityImage"

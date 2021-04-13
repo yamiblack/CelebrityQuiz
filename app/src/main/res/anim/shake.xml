@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="0" android:toXDelta="10" android:duration="500"
+    android:interpolator="@anim/cycle_3" />
+
+    <!-- 0.5초 동안 X10 만큼 3번 흔들어라 -->

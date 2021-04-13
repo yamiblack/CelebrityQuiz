@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,6 +57,10 @@ public class WordQuizActivity extends AppCompatActivity {
     private String answerText = "";
     private char[] answerArr;
     private List<String> correctAnswerList;
+    private ImageView[] heart = new ImageView[3];
+    ;
+    private int heartCnt = 0;
+    ;
 
     private List<String> userAnswerList;
 
@@ -69,8 +75,10 @@ public class WordQuizActivity extends AppCompatActivity {
         // Define Activity views
         questionView = findViewById(R.id.celebrityQuestion);
         imageView = findViewById(R.id.celebrityImage);
-
         textTime = findViewById(R.id.textTime);
+        heart[0] = findViewById(R.id.heart1);
+        heart[1] = findViewById(R.id.heart2);
+        heart[2] = findViewById(R.id.heart3);
 
         // Define button views
         buttonNext = findViewById(R.id.buttonNext);
@@ -116,7 +124,7 @@ public class WordQuizActivity extends AppCompatActivity {
         }
 
         correctAnswerList = new ArrayList<>();
-        for(int i = 0; i<quizList.size(); i++)
+        for (int i = 0; i < quizList.size(); i++)
             correctAnswerList.add(getCurrentAnswer(quizList.get(i)));
 
         textContainer = findViewById(R.id.answerLayout);
@@ -230,22 +238,31 @@ public class WordQuizActivity extends AppCompatActivity {
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
         if (indexCurrentQuestion != (quizList.size() - 1)) {
-            this.userAnswerList.add(answerText);
-            if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
-                quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
-            }
-
-            indexCurrentQuestion++;
-            if (indexCurrentQuestion == (quizList.size() - 1)) buttonNext.setEnabled(false);
-            if (indexCurrentQuestion != 0) buttonPrevious.setEnabled(true);
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);
 
-            answerArr = getCurrentAnswer(currentQuestion).toCharArray();
-            createAnswerText(answerArr.length);
-            setButton(answerArr);
-            answerText = "";
-            cntText = 0;
+            if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
+                this.userAnswerList.add(answerText);
+                if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
+                    quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
+                }
+
+                indexCurrentQuestion++;
+                if (indexCurrentQuestion == (quizList.size() - 1)) buttonNext.setEnabled(false);
+                if (indexCurrentQuestion != 0) buttonPrevious.setEnabled(true);
+                currentQuestion = quizList.get(indexCurrentQuestion);
+                currentQuestionView(currentQuestion);
+
+                answerArr = getCurrentAnswer(currentQuestion).toCharArray();
+                createAnswerText(answerArr.length);
+                setButton(answerArr);
+                answerText = "";
+                cntText = 0;
+            }
+
+            else {
+                heartCounter();
+            }
         }
     }
 
@@ -327,16 +344,22 @@ public class WordQuizActivity extends AppCompatActivity {
 
         for (int i = 0; i < 20; i++) {
             btn[i].setEnabled(true);
+
             btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    for (int i = 0; i < 20; i++) {
-                        if (v.getId() == btn[i].getId())
+                    for (int j = 0; j < 20; j++) {
+                        if (v.getId() == btn[j].getId())
                             if (cntText < answerArr.length) {
-                                view[cntText].setText(btn[i].getText());
-                                btn[i].setEnabled(false);
-                                answerText = answerText + view[cntText].getText().toString();
-                                cntText++;
+                                if(btn[j].getText().charAt(0) == answerArr[cntText]) {
+                                    view[cntText].setText(btn[j].getText());
+                                    btn[j].setEnabled(false);
+                                    answerText = answerText + view[cntText].getText().toString();
+                                    cntText++;
+                                }
+                                else {
+                                    heartCounter();
+                                }
                             }
                     }
                 }
@@ -355,7 +378,50 @@ public class WordQuizActivity extends AppCompatActivity {
         }
         return arr;
     }
+    private void heartCounter() {
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        switch (this.heartCnt){
+            case 0: {
+                heart[0].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                break;
+            }
+            case 1: {
+                heart[1].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                heart[1].startAnimation(shake);
+                break;
+            }
+            case 2: {
+                heart[2].setBackgroundResource(R.drawable.icon_heart_disable);
+                heart[0].startAnimation(shake);
+                heart[1].startAnimation(shake);
+                heart[2].startAnimation(shake);
+                break;
+            }
+        }
+        heartCnt++;
+        if(heartCnt == 3 ) {
+            stopTimer();
 
+            userAnswerList.add(answerText);
+            if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
+                quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
+            }
+
+            Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
+            i.putExtra("score", getScore());
+            // Change List to ArrayList to accommodate subList
+            ArrayList<Quiz> list = new ArrayList<>(quizList);
+            ArrayList<String> answerList = new ArrayList<>(userAnswerList);
+            ArrayList<String> correctAnswer = new ArrayList<>(correctAnswerList);
+            i.putExtra("quizList", list);
+            i.putExtra("userAnswerList", answerList);
+            i.putExtra("correctAnswerList", correctAnswer);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
+        }
+    }
     @Override
     public void onBackPressed() {
         countDownTimer.cancel();
