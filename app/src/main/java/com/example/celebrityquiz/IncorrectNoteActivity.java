@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,6 +70,10 @@ public class IncorrectNoteActivity extends AppCompatActivity {
                         }
                     }
                     adapter.notifyDataSetChanged();
+
+                    if(arrayList.size() == 0) {
+                        Toast.makeText(getApplicationContext(), "현재까지는 틀린 문제가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

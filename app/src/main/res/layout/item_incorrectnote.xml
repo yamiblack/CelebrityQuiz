@@ -19,6 +19,7 @@
             android:id="@+id/iv_celebrityImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/image_shape_orange"
@@ -32,8 +33,9 @@
             android:id="@+id/tv_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/nanumsquarebold"
             android:text="test"
             android:textSize="20sp" />

@@ -19,11 +19,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.protobuf.StringValue;
@@ -56,9 +60,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private TextView textTime;
     private CountDownTimer countDownTimer;
     private ImageView[] heart = new ImageView[3];
-    ;
-    private int heartCnt = 0;
 
+    private int heartCnt = 0;
     private int leftTime;
     private int currentTime;
 
@@ -180,7 +183,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stopTimer();
-//                setIncorrectNoteDB();
+                setIncorrectNoteDB();
                 setRankingDB();
                 Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
@@ -207,7 +210,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 setRankingDB();
-//                setIncorrectNoteDB();
+                setIncorrectNoteDB();
                 Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
@@ -327,7 +330,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
         if (heartCnt == 3) {
             setRankingDB();
-//            setIncorrectNoteDB();
+            setIncorrectNoteDB();
             stopTimer();
             Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
             i.putExtra("score", getScore());
@@ -389,12 +392,21 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     public void setIncorrectNoteDB() {
 
-        for(int i = 0; i < quizList.size(); i++) {
-            if(quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
+        for (int i = 0; i < quizList.size(); i++) {
+            if (quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("email", auth.getCurrentUser().getEmail());
                 data.put("imageURL", quizList.get(i).imageUrl);
-                data.put("answer", quizList.get(i).correctAnswer);
+
+                if (quizList.get(i).correctAnswer == 1) {
+                    data.put("answer", quizList.get(i).one);
+                } else if (quizList.get(i).correctAnswer == 2) {
+                    data.put("answer", quizList.get(i).two);
+                } else if (quizList.get(i).correctAnswer == 3) {
+                    data.put("answer", quizList.get(i).three);
+                } else {
+                    data.put("answer", quizList.get(i).four);
+                }
 
                 db.collection("INCORRECTNOTE")
                         .add(data)
@@ -411,6 +423,5 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             }
         }
     }
-
 
 }

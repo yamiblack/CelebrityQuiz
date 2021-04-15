@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -163,8 +164,7 @@ public class WordQuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stopTimer();
-
-//                setIncorrectNoteDB();
+                setIncorrectNoteDB();
                 setRankingDB();
 
                 userAnswerList.add(answerText);
@@ -202,7 +202,7 @@ public class WordQuizActivity extends AppCompatActivity {
             public void onFinish() {
 
                 setRankingDB();
-//                setIncorrectNoteDB();
+                setIncorrectNoteDB();
 
                 userAnswerList.add(answerText);
                 if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
@@ -276,9 +276,7 @@ public class WordQuizActivity extends AppCompatActivity {
                 setButton(answerArr);
                 answerText = "";
                 cntText = 0;
-            }
-
-            else {
+            } else {
                 heartCounter();
             }
         }
@@ -369,13 +367,12 @@ public class WordQuizActivity extends AppCompatActivity {
                     for (int j = 0; j < 20; j++) {
                         if (v.getId() == btn[j].getId())
                             if (cntText < answerArr.length) {
-                                if(btn[j].getText().charAt(0) == answerArr[cntText]) {
+                                if (btn[j].getText().charAt(0) == answerArr[cntText]) {
                                     view[cntText].setText(btn[j].getText());
                                     btn[j].setEnabled(false);
                                     answerText = answerText + view[cntText].getText().toString();
                                     cntText++;
-                                }
-                                else {
+                                } else {
                                     heartCounter();
                                 }
                             }
@@ -396,9 +393,10 @@ public class WordQuizActivity extends AppCompatActivity {
         }
         return arr;
     }
+
     private void heartCounter() {
         Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-        switch (this.heartCnt){
+        switch (this.heartCnt) {
             case 0: {
                 heart[0].setBackgroundResource(R.drawable.icon_heart_disable);
                 heart[0].startAnimation(shake);
@@ -419,12 +417,12 @@ public class WordQuizActivity extends AppCompatActivity {
             }
         }
         heartCnt++;
-        if(heartCnt == 3 ) {
+        if (heartCnt == 3) {
 
             stopTimer();
 
             setRankingDB();
-//            setIncorrectNoteDB();
+            setIncorrectNoteDB();
 
             userAnswerList.add(answerText);
             if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
@@ -444,6 +442,7 @@ public class WordQuizActivity extends AppCompatActivity {
             startActivity(i);
         }
     }
+
     @Override
     public void onBackPressed() {
         countDownTimer.cancel();
@@ -476,12 +475,21 @@ public class WordQuizActivity extends AppCompatActivity {
 
     public void setIncorrectNoteDB() {
 
-        for(int i = 0; i < quizList.size(); i++) {
-            if(quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
+        for (int i = 0; i < quizList.size(); i++) {
+            if (quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
                 Map<String, Object> data = new HashMap<>();
                 data.put("email", auth.getCurrentUser().getEmail());
                 data.put("imageURL", quizList.get(i).imageUrl);
-                data.put("answer", quizList.get(i).correctAnswer);
+
+                if (quizList.get(i).correctAnswer == 1) {
+                    data.put("answer", quizList.get(i).one);
+                } else if (quizList.get(i).correctAnswer == 2) {
+                    data.put("answer", quizList.get(i).two);
+                } else if (quizList.get(i).correctAnswer == 3) {
+                    data.put("answer", quizList.get(i).three);
+                } else {
+                    data.put("answer", quizList.get(i).four);
+                }
 
                 db.collection("INCORRECTNOTE")
                         .add(data)
