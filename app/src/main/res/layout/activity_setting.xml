@@ -208,6 +208,25 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gameTypeBackground" />
 
+
+    <ToggleButton
+        android:id="@+id/toggleMusic"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_orange_rounded"
+        android:elevation="2dp"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
+        android:soundEffectsEnabled="false"
+        android:textAllCaps="false"
+        android:textOff="배경음악 ON"
+        android:textOn="배경음악 OFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+
+
     <Button
         android:id="@+id/buttonLogOut"
         android:layout_width="270dp"
@@ -221,21 +240,6 @@
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
-
-    <Button
-        android:id="@+id/buttonMusic"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_orange_rounded"
-        android:elevation="2dp"
-        android:fontFamily="@font/nanumsquarebold"
-        android:gravity="center"
-        android:text="로그아웃"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdate" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleMusic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

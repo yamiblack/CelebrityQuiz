@@ -71,6 +71,8 @@
             </intent-filter>
         </activity>
 
+        <service android:name="com.example.celebrityquiz.MusicService" />
+
     </application>
 
 </manifest>

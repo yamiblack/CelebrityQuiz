@@ -2,12 +2,14 @@ package com.example.celebrityquiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,8 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingActivity extends AppCompatActivity {
 
     private Context context = this;
+    private Intent intent;
 
-    // Declare Variables
     private RadioButton radioButtonLevelOne;
     private RadioButton radioButtonLevelTwo;
     private RadioButton radioButtonLevelThree;
@@ -27,22 +29,23 @@ public class SettingActivity extends AppCompatActivity {
     private RadioButton radioButtonMultipleChoice;
     private RadioButton radioButtonWordQuiz;
     private ProgressBar progressBarDownload;
+    private ToggleButton toggleButtonMusic;
     private Button buttonLogOut;
 
+    private String[] jsonUrl;
     public int level;
     public int seconds;
     public int gameType;
 
-    private Intent intent;
-
-    private String[] jsonUrl;
-
     private SoundPlayer soundPlayer;
+    private AudioManager audioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        soundPlayer = new SoundPlayer(this);
 
         // Define Level views
         radioButtonLevelOne = findViewById(R.id.radioButtonLevelOne);
@@ -74,10 +77,22 @@ public class SettingActivity extends AppCompatActivity {
         buttonUpdate.setEnabled(true);
         downloadTask = null; // Always initialize task to null
 
+        toggleButtonMusic = findViewById(R.id.toggleMusic);
+        toggleButtonMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentMusic = new Intent(getApplicationContext(), MusicService.class);
+
+                if (toggleButtonMusic.isChecked() == true) {
+                    startService(intentMusic);
+                } else {
+                    stopService(intentMusic);
+                }
+
+            }
+        });
+
         buttonLogOut = findViewById(R.id.buttonLogOut);
-
-        soundPlayer = new SoundPlayer(this);
-
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
