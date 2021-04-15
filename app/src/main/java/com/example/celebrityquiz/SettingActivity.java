@@ -31,6 +31,9 @@ public class SettingActivity extends AppCompatActivity {
 
     private Intent intent;
 
+    private String[] jsonUrl;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,10 +118,13 @@ public class SettingActivity extends AppCompatActivity {
 
     public void onButtonUpdate(View view) {
         if (downloadTask == null) {
-            // Import data from internet
-            String jsonUrl = "https://api.jsonbin.io/b/5e8f60bb172eb6438960f731";
+            jsonUrl = new String[3];
+            jsonUrl[0] = "https://api.jsonbin.io/b/5e8f60bb172eb6438960f731";
+            jsonUrl[1] = "https://api.jsonbin.io/b/607864715b165e19f620c32b";
+            jsonUrl[2] = "https://api.jsonbin.io/b/607805a35b165e19f62090f3/4";
+
             downloadTask = new DownloadTask(downloadListener, this);
-            downloadTask.execute(jsonUrl);
+            downloadTask.execute(jsonUrl[(int) (Math.random() * 3)]);
 
             if (radioButtonLevelOne.isChecked()) level = 1;
             if (radioButtonLevelTwo.isChecked()) level = 2;
@@ -136,6 +142,7 @@ public class SettingActivity extends AppCompatActivity {
             intent.putExtra("seconds", seconds);
             intent.putExtra("gameType", gameType);
             intent.putExtra("settings", 1);
+            intent.putExtra("isNew", 0);
             Toast.makeText(getApplicationContext(), "잠시만 기다려주세요.", Toast.LENGTH_SHORT).show();
         }
     }

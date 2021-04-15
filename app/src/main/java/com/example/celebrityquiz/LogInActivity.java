@@ -37,10 +37,7 @@ public class LogInActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
-//        updateUI(currentUser);
     }
 
     @Override
@@ -83,8 +80,7 @@ public class LogInActivity extends Activity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail : success");
+                                Log.e(TAG, "signInWithEmail : success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 startToast("로그인에 성공했습니다.");
                                 finishSignInActivity();

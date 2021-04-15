@@ -25,7 +25,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/image_shape_orange"
+        android:background="@drawable/image_shape"
         android:contentDescription="@null"
         android:elevation="3dp"
         tools:ignore="UnusedAttribute" />

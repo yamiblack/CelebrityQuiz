@@ -76,10 +76,6 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Hide toolbar
-//        Objects.requireNonNull(getSupportActionBar()).hide();
-
-        // Define Activity views
         questionView = findViewById(R.id.celebrityQuestion);
         imageView = findViewById(R.id.celebrityImage);
         radioGroup = findViewById(R.id.celebrityOption);
@@ -91,7 +87,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         heart[0] = findViewById(R.id.heart1);
         heart[1] = findViewById(R.id.heart2);
         heart[2] = findViewById(R.id.heart3);
-        // setOnClickListener and set checked onClick for each button
+
         radioButtonOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,32 +120,14 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             }
         });
 
-        // Define button views
         buttonNext = findViewById(R.id.buttonNext);
         buttonPrevious = findViewById(R.id.buttonPrevious);
 
-        // Access intent interface and get variables
         Intent intent = getIntent();
         level = intent.getIntExtra("level", 1);
         seconds = intent.getIntExtra("seconds", 30);
         gameType = intent.getIntExtra("gameType", 1);
         String string = intent.getStringExtra("string");
-//        String string = null;
-
-        // Safely read data from saved file
-//        try {
-//            FileInputStream fileInputStream = openFileInput("myJson");
-//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            StringBuilder stringBuilder = new StringBuilder();
-//            String line;
-//            while ((line = bufferedReader.readLine()) != null) {
-//                stringBuilder.append(line);
-//            }
-//            string = stringBuilder.toString();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<Quiz>>() {

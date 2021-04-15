@@ -46,7 +46,6 @@
             android:name="com.example.celebrityquiz.SettingActivity"
             android:theme="@style/OrangeThemeNoActionBar" />
 
-
         <activity
             android:name="com.example.celebrityquiz.MultipleChoiceActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

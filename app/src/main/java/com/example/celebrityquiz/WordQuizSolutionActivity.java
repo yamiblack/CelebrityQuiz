@@ -12,20 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class WordQuizSolutionActivity extends AppCompatActivity{
+public class WordQuizSolutionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wordsolution);
-
-//        // Define Navigation
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setTitle("Results");
-//        }
 
         // Interface instance to get values from QuizActivity
         int scoreValue = getIntent().getIntExtra("score", 0);

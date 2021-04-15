@@ -26,8 +26,6 @@ public class SignUpActivity extends Activity {
 
     private FirebaseAuth mAuth;
 
-//    private QuestionDBOpenHelper dBOpenHelper = new QuestionDBOpenHelper(this);
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +39,7 @@ public class SignUpActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//        updateUI(currentUser);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -51,7 +47,6 @@ public class SignUpActivity extends Activity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.btn_signUp:
-//                Log.e("CLick", "Click");
                     signUp();
                     break;
             }
@@ -63,7 +58,6 @@ public class SignUpActivity extends Activity {
         String password = ((EditText) findViewById(R.id.et_password)).getText().toString();
         String passwordCheck = ((EditText) findViewById(R.id.et_verifyPassword)).getText().toString();
 
-
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
 
             if (passwordCheck.equals(password)) {
@@ -72,7 +66,6 @@ public class SignUpActivity extends Activity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("회원가입이 성공적으로 진행됐습니다!");
 
@@ -88,12 +81,8 @@ public class SignUpActivity extends Activity {
 
                                     ad.show();
 
-
                                 } else {
-                                    if (task.getException() != null) {
-                                        startToast(task.getException().toString());
-                                    }
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Log.e(TAG, "createUserWithEmail:failure", task.getException());
                                 }
                             }
                         });

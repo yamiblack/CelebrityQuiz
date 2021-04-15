@@ -76,9 +76,6 @@ public class WordQuizActivity extends AppCompatActivity {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_wordquiz);
 
-        // Hide toolbar
-//        Objects.requireNonNull(getSupportActionBar()).hide();
-
         // Define Activity views
         questionView = findViewById(R.id.celebrityQuestion);
         imageView = findViewById(R.id.celebrityImage);
@@ -100,22 +97,6 @@ public class WordQuizActivity extends AppCompatActivity {
         seconds = intent.getIntExtra("seconds", 30);
         gameType = intent.getIntExtra("gameType", 2);
         String string = intent.getStringExtra("string");
-//        String string = null;
-
-        // Safely read data from saved file
-//        try {
-//            FileInputStream fileInputStream = openFileInput("myJson");
-//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            StringBuilder stringBuilder = new StringBuilder();
-//            String line;
-//            while ((line = bufferedReader.readLine()) != null) {
-//                stringBuilder.append(line);
-//            }
-//            string = stringBuilder.toString();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         Gson gson = new Gson();
         Type type = new TypeToken<List<Quiz>>() {

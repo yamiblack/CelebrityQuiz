@@ -24,14 +24,6 @@ public class MultipleChoiceSolutionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solution);
 
-//        // Define Navigation
-//        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setTitle("Results");
-//        }
-
         // Interface instance to get values from QuizActivity
         int scoreValue = getIntent().getIntExtra("score", 0);
         List<Quiz> quizList = (List<Quiz>) getIntent().getSerializableExtra("quizList");
