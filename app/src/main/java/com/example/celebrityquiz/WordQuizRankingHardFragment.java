@@ -1,5 +1,6 @@
 package com.example.celebrityquiz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,7 +69,7 @@ public class WordQuizRankingHardFragment extends Fragment {
                         }
                     }
 
-                    for(int i = 0; i < arrayList.size(); i++) {
+                    for (int i = 0; i < arrayList.size(); i++) {
                         arrayList.get(i).setRank(String.valueOf(i + 1));
                     }
 

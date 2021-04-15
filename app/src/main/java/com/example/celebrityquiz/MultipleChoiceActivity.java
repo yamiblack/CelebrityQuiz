@@ -68,6 +68,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -75,6 +77,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        soundPlayer = new SoundPlayer(context);
 
         questionView = findViewById(R.id.celebrityQuestion);
         imageView = findViewById(R.id.celebrityImage);
@@ -160,6 +164,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSubmitSound();
                 stopTimer();
                 setIncorrectNoteDB();
                 setRankingDB();
@@ -209,6 +214,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     // Pre-define new views before setting previous question as current question, for index < 0
     public void onButtonPrevious(View view) {
+        soundPlayer.playSelectSound();
         if (indexCurrentQuestion != 0) {
             indexCurrentQuestion--;
             if (indexCurrentQuestion == 0) buttonPrevious.setEnabled(false);
@@ -243,6 +249,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
+        soundPlayer.playSelectSound();
         if (indexCurrentQuestion != (quizList.size() - 1)) {
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);

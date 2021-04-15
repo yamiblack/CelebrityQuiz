@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnIncorrectNote;
     private Button btnGameSettings;
 
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
         btnIncorrectNote = (Button) findViewById(R.id.btn_IncorrectNote);
         btnGameSettings = (Button) findViewById(R.id.btn_gameSettings);
 
+        soundPlayer = new SoundPlayer(context);
+
         btnGameStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playStartSound();
                 Intent intent = getIntent();
 
                 int isNew = intent.getIntExtra("isNew", 0);
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btnGlobalRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSelectSound();
                 startActivity(new Intent(getApplicationContext(), RankingActivity.class));
             }
         });
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         btnMyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSelectSound();
                 startActivity(new Intent(getApplicationContext(), MyPageActivity.class));
             }
         });
@@ -107,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         btnIncorrectNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSelectSound();
                 startActivity(new Intent(getApplicationContext(), IncorrectNoteActivity.class));
             }
         });
@@ -114,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         btnGameSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSelectSound();
                 startActivity(new Intent(getApplicationContext(), SettingActivity.class));
             }
         });

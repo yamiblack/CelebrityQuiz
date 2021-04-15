@@ -33,7 +33,8 @@ public class MultipleChoiceSolutionAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View layoutInflater = LayoutInflater.from(context).
                 inflate(R.layout.solution, viewGroup, false);
-        return new RecyclerView.ViewHolder(layoutInflater) {};
+        return new RecyclerView.ViewHolder(layoutInflater) {
+        };
     }
 
     @Override
@@ -50,7 +51,7 @@ public class MultipleChoiceSolutionAdapter extends RecyclerView.Adapter {
         viewHolder.itemView.findViewById(R.id.horizontalDivider);
 
         // Format recycler view content
-        if(!quizList.isEmpty()) {
+        if (!quizList.isEmpty()) {
             Quiz quiz = quizList.get(position);
 
             viewQuestion.setText(String.format("%s. %s", position + 1, quiz.question));
@@ -62,62 +63,58 @@ public class MultipleChoiceSolutionAdapter extends RecyclerView.Adapter {
 
             // This is crucial for Marking system
             /* First, determine if userAnswer is the same as correctAnswer, IF YES, mark it
-            * green and set it checked. ELSE, if user didn't select anything clearCheck() else if
-            * userAnswer is wrong, mark userAnswer red, locate
-            * correctAnswer and mark it green.
-            */
-            if(quiz.userAnswer == quiz.correctAnswer) {
-                if(1 == quiz.correctAnswer) {
+             * green and set it checked. ELSE, if user didn't select anything clearCheck() else if
+             * userAnswer is wrong, mark userAnswer red, locate
+             * correctAnswer and mark it green.
+             */
+            if (quiz.userAnswer == quiz.correctAnswer) {
+                if (1 == quiz.correctAnswer) {
                     radioButtonOne.setChecked(true);
                     radioButtonOne.setTextColor(Color.parseColor("#FF0BA512"));
-                }
-                else if (2 == quiz.correctAnswer) {
+                } else if (2 == quiz.correctAnswer) {
                     radioButtonTwo.setChecked(true);
                     radioButtonTwo.setTextColor(Color.parseColor("#FF0BA512"));
-                }
-                else if (3 == quiz.correctAnswer) {
+                } else if (3 == quiz.correctAnswer) {
                     radioButtonThree.setChecked(true);
                     radioButtonThree.setTextColor(Color.parseColor("#FF0BA512"));
-                }
-                else if (4 == quiz.correctAnswer) {
+                } else if (4 == quiz.correctAnswer) {
                     radioButtonFour.setChecked(true);
                     radioButtonFour.setTextColor(Color.parseColor("#FF0BA512"));
                 }
-            }
-            else {
-                if(1 == quiz.userAnswer) {
+            } else {
+                if (1 == quiz.userAnswer) {
                     radioButtonOne.setChecked(true);
                     radioButtonOne.setTextColor(Color.RED);
                 }
-                if(1 == quiz.correctAnswer) {
+                if (1 == quiz.correctAnswer) {
                     radioButtonOne.setTextColor(Color.parseColor("#FF0BA512"));
                 }
 
-                if(2 == quiz.userAnswer) {
+                if (2 == quiz.userAnswer) {
                     radioButtonTwo.setChecked(true);
                     radioButtonTwo.setTextColor(Color.RED);
                 }
-                if(2 == quiz.correctAnswer) {
+                if (2 == quiz.correctAnswer) {
                     radioButtonTwo.setTextColor(Color.parseColor("#FF0BA512"));
                 }
 
-                if(3 == quiz.userAnswer) {
+                if (3 == quiz.userAnswer) {
                     radioButtonThree.setChecked(true);
                     radioButtonThree.setTextColor(Color.RED);
                 }
-                if(3 == quiz.correctAnswer) {
+                if (3 == quiz.correctAnswer) {
                     radioButtonThree.setTextColor(Color.parseColor("#FF0BA512"));
                 }
 
-                if(4 == quiz.userAnswer) {
+                if (4 == quiz.userAnswer) {
                     radioButtonFour.setChecked(true);
                     radioButtonFour.setTextColor(Color.RED);
                 }
-                if(4 == quiz.correctAnswer) {
+                if (4 == quiz.correctAnswer) {
                     radioButtonFour.setTextColor(Color.parseColor("#FF0BA512"));
                 }
             }
-            if(0 == quiz.userAnswer) radioGroup.clearCheck();
+            if (0 == quiz.userAnswer) radioGroup.clearCheck();
 
             // Disable all radioButton to avoid answer misinterpretations
             radioButtonOne.setEnabled(false);

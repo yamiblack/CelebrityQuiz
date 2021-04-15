@@ -1,5 +1,6 @@
 package com.example.celebrityquiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingActivity extends AppCompatActivity {
 
+    private Context context = this;
+
     // Declare Variables
     private RadioButton radioButtonLevelOne;
     private RadioButton radioButtonLevelTwo;
@@ -25,6 +28,7 @@ public class SettingActivity extends AppCompatActivity {
     private RadioButton radioButtonWordQuiz;
     private ProgressBar progressBarDownload;
     private Button buttonLogOut;
+
     public int level;
     public int seconds;
     public int gameType;
@@ -33,6 +37,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private String[] jsonUrl;
 
+    private SoundPlayer soundPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +75,13 @@ public class SettingActivity extends AppCompatActivity {
         downloadTask = null; // Always initialize task to null
 
         buttonLogOut = findViewById(R.id.buttonLogOut);
+
+        soundPlayer = new SoundPlayer(this);
+
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundPlayer.playSelectSound();
                 FirebaseAuth.getInstance().signOut();
                 startLogInActivity();
             }
@@ -117,6 +126,7 @@ public class SettingActivity extends AppCompatActivity {
     };
 
     public void onButtonUpdate(View view) {
+        soundPlayer.playSelectSound();
         if (downloadTask == null) {
             jsonUrl = new String[3];
             jsonUrl[0] = "https://api.jsonbin.io/b/5e8f60bb172eb6438960f731";

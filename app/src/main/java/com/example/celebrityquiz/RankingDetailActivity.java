@@ -38,13 +38,13 @@ public class RankingDetailActivity extends AppCompatActivity {
         intent = getIntent();
         rankingType = intent.getIntExtra("rankingType", 0);
 
-        if(rankingType == 0) {
+        if (rankingType == 0) {
             Toast.makeText(getApplicationContext(), "네트워크 상태를 확인해 주세요.", Toast.LENGTH_SHORT).show();
-        } else if(rankingType == 1) {
+        } else if (rankingType == 1) {
             tvRankingType.setText("객관식 글로벌 랭킹");
             multipleChoiceRankingPagerAdapter = new MultipleChoiceRankingPagerAdapter(getSupportFragmentManager(), tlRanking.getTabCount());
             vpRanking.setAdapter(multipleChoiceRankingPagerAdapter);
-        } else if(rankingType == 2) {
+        } else if (rankingType == 2) {
             tvRankingType.setText("워드 퀴즈 글로벌 랭킹");
             wordQuizRankingPagerAdapter = new WordQuizRankingPagerAdapter(getSupportFragmentManager(), tlRanking.getTabCount());
             vpRanking.setAdapter(wordQuizRankingPagerAdapter);

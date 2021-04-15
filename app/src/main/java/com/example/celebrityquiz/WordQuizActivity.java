@@ -1,5 +1,6 @@
 package com.example.celebrityquiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 public class WordQuizActivity extends AppCompatActivity {
+
+    private Context context = this;
 
     // Declare variables
     private List<Quiz> quizList;
@@ -71,6 +74,8 @@ public class WordQuizActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
+    private SoundPlayer soundPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -90,6 +95,8 @@ public class WordQuizActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        soundPlayer = new SoundPlayer(this);
 
         // Access intent interface and get variables
         Intent intent = getIntent();
@@ -144,6 +151,7 @@ public class WordQuizActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundPlayer.playSubmitSound();
                 stopTimer();
                 setIncorrectNoteDB();
                 setRankingDB();
@@ -214,7 +222,7 @@ public class WordQuizActivity extends AppCompatActivity {
 
     // Pre-define new views before setting previous question as current question, for index < 0
     public void onButtonPrevious(View view) {
-
+        soundPlayer.playSelectSound();
         if (indexCurrentQuestion != 0) {
             int size = this.userAnswerList.size();
             size = size - 1;
@@ -236,6 +244,7 @@ public class WordQuizActivity extends AppCompatActivity {
 
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
+        soundPlayer.playSelectSound();
         if (indexCurrentQuestion != (quizList.size() - 1)) {
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);

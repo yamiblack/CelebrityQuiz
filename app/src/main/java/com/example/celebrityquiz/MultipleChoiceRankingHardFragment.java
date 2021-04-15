@@ -68,7 +68,7 @@ public class MultipleChoiceRankingHardFragment extends Fragment {
                         }
                     }
 
-                    for(int i = 0; i < arrayList.size(); i++) {
+                    for (int i = 0; i < arrayList.size(); i++) {
                         arrayList.get(i).setRank(String.valueOf(i + 1));
                     }
 

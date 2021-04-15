@@ -76,7 +76,7 @@ public class MyPageMediumFragment extends Fragment {
                         tvAverageScore.setText("기록 없음");
                     }
 
-                    if(count != 0) {
+                    if (count != 0) {
                         tvBestScore.setText(String.valueOf(bestScore));
                         tvAverageScore.setText(formatting(scoreSum, count));
                     }

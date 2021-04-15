@@ -71,7 +71,7 @@ public class IncorrectNoteActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
 
-                    if(arrayList.size() == 0) {
+                    if (arrayList.size() == 0) {
                         Toast.makeText(getApplicationContext(), "현재까지는 틀린 문제가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 }

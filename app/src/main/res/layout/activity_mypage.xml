@@ -30,10 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
-        app:tabSelectedTextColor="@color/colorMain"
         app:tabIndicatorColor="@color/colorMain"
         app:tabIndicatorHeight="7dp"
-        tools:ignore="MissingConstraints"/>
+        app:tabSelectedTextColor="@color/colorMain"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.viewpager.widget.ViewPager
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tl_mypage"
         tools:ignore="MissingClass"
-        tools:layout_editor_absoluteX="1dp"/>
+        tools:layout_editor_absoluteX="1dp" />
 
 
 </LinearLayout>

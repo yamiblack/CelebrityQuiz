@@ -10,8 +10,7 @@ public class SoundPlayer {
     private static int selectSound;
     private static int submitSound;
 
-    public SoundPlayer(Context context){
-
+    public SoundPlayer(Context context) {
         soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
 
         startSound = soundPool.load(context, R.raw.startsound, 1);
@@ -19,19 +18,15 @@ public class SoundPlayer {
         submitSound = soundPool.load(context, R.raw.submitsound, 1);
     }
 
-    public void playStartSound(){
-
-        //play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate)
+    public void playStartSound() {
         soundPool.play(startSound, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
-    public void playSelectSound(){
-
+    public void playSelectSound() {
         soundPool.play(selectSound, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
-    public void playSubmitSound(){
-
+    public void playSubmitSound() {
         soundPool.play(submitSound, 1.0f, 1.0f, 1, 0, 1.0f);
     }
 
