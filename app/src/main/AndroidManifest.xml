@@ -27,7 +27,11 @@
             android:theme="@style/OrangeThemeNoActionBar" />
 
         <activity
-            android:name="com.example.celebrityquiz.GlobalRankingActivity"
+            android:name="com.example.celebrityquiz.RankingActivity"
+            android:theme="@style/OrangeThemeNoActionBar" />
+
+        <activity
+            android:name="com.example.celebrityquiz.RankingDetailActivity"
             android:theme="@style/OrangeThemeNoActionBar" />
 
         <activity
@@ -48,7 +52,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name="com.example.celebrityquiz.SolutionActivity"
+            android:name="com.example.celebrityquiz.MultipleChoiceSolutionActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
@@ -56,7 +60,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name="com.example.celebrityquiz.WordSolutionActivity"
+            android:name="com.example.celebrityquiz.WordQuizSolutionActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity

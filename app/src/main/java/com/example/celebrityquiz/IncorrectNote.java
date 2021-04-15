@@ -1,15 +1,24 @@
 package com.example.celebrityquiz;
 
 public class IncorrectNote {
-    String imageUrl;
+    String email;
+    String imageURL;
     String answer;
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getEmail() {
+        return email;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageUrl) {
+        this.imageURL = imageUrl;
     }
 
     public String getAnswer() {

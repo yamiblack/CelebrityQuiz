@@ -12,22 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
-public class IncorrectNoteViewAdapter extends RecyclerView.Adapter<IncorrectNoteViewAdapter.ViewHolder> {
+public class IncorrectNoteRecyclerViewAdapter extends RecyclerView.Adapter<IncorrectNoteRecyclerViewAdapter.ViewHolder> {
     Context context;
     ArrayList<IncorrectNote> items;
 
-    public IncorrectNoteViewAdapter(Context context, ArrayList<IncorrectNote> items) {
+    public IncorrectNoteRecyclerViewAdapter(Context context, ArrayList<IncorrectNote> items) {
         this.context = context;
         this.items = items;
     }
 
     @NonNull
     @Override
-    public IncorrectNoteViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IncorrectNoteRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incorrectnote, parent, false);
-        return new IncorrectNoteViewAdapter.ViewHolder(view);
+        return new IncorrectNoteRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
@@ -35,13 +37,11 @@ public class IncorrectNoteViewAdapter extends RecyclerView.Adapter<IncorrectNote
         IncorrectNote incorrectNote = items.get(position);
 
         try {
-//            Glide.with(imageView.getContext()).load(quiz.imageUrl).into(imageView);
-//            radioButtonOne.setText(quiz.one);
-//            radioButtonTwo.setText(quiz.two);
-//            radioButtonThree.setText(quiz.three);
-//            radioButtonFour.setText(quiz.four);
+            String imgURL = incorrectNote.getImageURL();
+            Glide.with(context).load(imgURL).into(holder.ivCelebrityImage);
+            holder.tvAnswer.setText(incorrectNote.getAnswer());
         } catch (NullPointerException e) {
-            Log.e("error ", "fail");
+            Log.e("error ", e.getMessage());
         }
     }
 

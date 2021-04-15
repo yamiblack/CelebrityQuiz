@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.celebrityquiz.R;
-import com.example.celebrityquiz.SolutionAdapter;
-import com.example.celebrityquiz.Quiz;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
-public class SolutionActivity extends AppCompatActivity{
+public class MultipleChoiceSolutionActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,9 @@ public class SolutionActivity extends AppCompatActivity{
 
         // RecycleView definitions
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        SolutionAdapter solutionAdapter = new SolutionAdapter(quizList, this);
+        MultipleChoiceSolutionAdapter multipleChoiceSolutionAdapter = new MultipleChoiceSolutionAdapter(quizList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(solutionAdapter);
+        recyclerView.setAdapter(multipleChoiceSolutionAdapter);
     }
 
     // Function to display well done image if user gets all correct | also settings for total value
@@ -71,4 +71,5 @@ public class SolutionActivity extends AppCompatActivity{
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 }

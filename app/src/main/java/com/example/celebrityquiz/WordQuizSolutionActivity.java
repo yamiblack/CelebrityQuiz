@@ -10,14 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.celebrityquiz.R;
-import com.example.celebrityquiz.WordSolutionAdapter;
-import com.example.celebrityquiz.Quiz;
-
 import java.util.List;
-import java.util.Objects;
 
-public class WordSolutionActivity extends AppCompatActivity{
+public class WordQuizSolutionActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +45,9 @@ public class WordSolutionActivity extends AppCompatActivity{
 
         // RecycleView definitions
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        WordSolutionAdapter wordSolutionAdapter = new WordSolutionAdapter(quizList, this, userAnswerText, correctAnswerList);
+        WordQuizSolutionAdapter wordQuizSolutionAdapter = new WordQuizSolutionAdapter(quizList, this, userAnswerText, correctAnswerList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(wordSolutionAdapter);
+        recyclerView.setAdapter(wordQuizSolutionAdapter);
     }
 
     // Function to display well done image if user gets all correct | also settings for total value

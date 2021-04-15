@@ -1,5 +1,6 @@
 package com.example.celebrityquiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,27 +15,33 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.protobuf.StringValue;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 public class MultipleChoiceActivity extends AppCompatActivity {
 
-    // Declare variables
+    Context context = this;
+
     private List<Quiz> quizList;
+    private int level;
     private int seconds;
+    private int gameType;
     private int indexCurrentQuestion;
 
     private TextView questionView;
@@ -48,12 +55,23 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private Button buttonNext;
     private TextView textTime;
     private CountDownTimer countDownTimer;
-    private ImageView[] heart = new ImageView[3];;
-    private int heartCnt = 0;;
+    private ImageView[] heart = new ImageView[3];
+    ;
+    private int heartCnt = 0;
+
+    private int leftTime;
+    private int currentTime;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_quiz);
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Hide toolbar
 //        Objects.requireNonNull(getSupportActionBar()).hide();
@@ -109,8 +127,9 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
         // Access intent interface and get variables
         Intent intent = getIntent();
-        int level = intent.getIntExtra("level", 1);
+        level = intent.getIntExtra("level", 1);
         seconds = intent.getIntExtra("seconds", 30);
+        gameType = intent.getIntExtra("gameType", 1);
         String string = intent.getStringExtra("string");
 //        String string = null;
 
@@ -130,7 +149,8 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 //        }
 
         Gson gson = new Gson();
-        Type type = new TypeToken<List<Quiz>>(){}.getType();
+        Type type = new TypeToken<List<Quiz>>() {
+        }.getType();
         List<Quiz> list = gson.fromJson(string, type);
 
         // Set sublist based on user set level
@@ -160,12 +180,14 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stopTimer();
-                Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
+                setIncorrectNoteDB();
+                setRankingDB();
+                Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
                 i.putExtra("quizList", list);
-                i.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
             }
         });
@@ -177,12 +199,16 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(seconds * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textTime.setText(String.valueOf((int) (millisUntilFinished / 1000)));
+                leftTime = (int) (millisUntilFinished / 1000);
+                currentTime = seconds - leftTime;
+                textTime.setText(String.valueOf(leftTime));
             }
 
             @Override
             public void onFinish() {
-                Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
+                setRankingDB();
+                setIncorrectNoteDB();
+                Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -202,15 +228,15 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     // Pre-define new views before setting previous question as current question, for index < 0
     public void onButtonPrevious(View view) {
-        if(indexCurrentQuestion != 0) {
+        if (indexCurrentQuestion != 0) {
             indexCurrentQuestion--;
-            if(indexCurrentQuestion == 0) buttonPrevious.setEnabled(false);
-            if(indexCurrentQuestion != (quizList.size() - 1)) buttonNext.setEnabled(true);
+            if (indexCurrentQuestion == 0) buttonPrevious.setEnabled(false);
+            if (indexCurrentQuestion != (quizList.size() - 1)) buttonNext.setEnabled(true);
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);
 
             radioGroup = findViewById(R.id.celebrityOption);
-            if(currentQuestion.userAnswer == 0) radioGroup.clearCheck();
+            if (currentQuestion.userAnswer == 0) radioGroup.clearCheck();
             else {
                 switch (currentQuestion.userAnswer) {
                     case 1: {
@@ -236,7 +262,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     // Pre-define new views before setting next question as current question, for index > list.size()
     public void onButtonNext(View view) {
-        if(indexCurrentQuestion != (quizList.size() - 1)) {
+        if (indexCurrentQuestion != (quizList.size() - 1)) {
             Quiz currentQuestion = quizList.get(indexCurrentQuestion);
             currentQuestionView(currentQuestion);
 
@@ -269,8 +295,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 heartCounter();
             }
         }
@@ -278,7 +303,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
     private void heartCounter() {
         Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
-        switch (this.heartCnt){
+        switch (this.heartCnt) {
             case 0: {
                 heart[0].setBackgroundResource(R.drawable.icon_heart_disable);
                 heart[0].startAnimation(shake);
@@ -300,14 +325,16 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         }
         heartCnt++;
 
-        if(heartCnt == 3 ) {
+        if (heartCnt == 3) {
+            setRankingDB();
+            setIncorrectNoteDB();
             stopTimer();
-            Intent i = new Intent(MultipleChoiceActivity.this, SolutionActivity.class);
+            Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
             i.putExtra("score", getScore());
             // Change List to ArrayList to accommodate subList
             ArrayList<Quiz> list = new ArrayList<>(quizList);
             i.putExtra("quizList", list);
-            i.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP | Intent. FLAG_ACTIVITY_SINGLE_TOP );
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
     }
@@ -337,4 +364,53 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
+    public void setRankingDB() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("email", auth.getCurrentUser().getEmail());
+        data.put("gameType", String.valueOf(gameType));
+        data.put("level", String.valueOf(level));
+        data.put("score", String.valueOf(getScore()));
+        data.put("time", String.valueOf(currentTime));
+
+        db.collection("RANKING")
+                .add(data)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    public void setIncorrectNoteDB() {
+
+        for(int i = 0; i < quizList.size(); i++) {
+            if(quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
+                Map<String, Object> data = new HashMap<>();
+                data.put("email", auth.getCurrentUser().getEmail());
+                data.put("imageURL", quizList.get(i).imageUrl);
+                data.put("answer", quizList.get(i).correctAnswer);
+
+                db.collection("INCORRECTNOTE")
+                        .add(data)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }
+        }
+    }
+
+
 }

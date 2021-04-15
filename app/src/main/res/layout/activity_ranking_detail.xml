@@ -10,22 +10,22 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/icon_player" />
+        android:background="@drawable/icon_global" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_ranking_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquarebold"
         android:gravity="center"
-        android:text="email here"
+        android:text="글로벌 랭킹"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tl_mypage"
+        android:id="@+id/tl_ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -35,15 +35,29 @@
         app:tabIndicatorHeight="7dp"
         tools:ignore="MissingConstraints"/>
 
-
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_mypage"
+        android:id="@+id/vp_ranking"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tl_mypage"
         tools:ignore="MissingClass"
-        tools:layout_editor_absoluteX="1dp"/>
+        tools:layout_editor_absoluteX="1dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="70dp"
+            android:background="@android:color/transparent"
+            android:divider="#ffffff"
+            android:dividerHeight="7dp"
+            android:scrollbars="vertical" />
+
+    </androidx.viewpager.widget.ViewPager>
 
 
 </LinearLayout>

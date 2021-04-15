@@ -11,32 +11,33 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.Map;
 
 public class WordQuizActivity extends AppCompatActivity {
 
     // Declare variables
     private List<Quiz> quizList;
+    private int level;
     private int seconds;
+    private int gameType;
     private int indexCurrentQuestion;
 
     private TextView questionView;
@@ -58,11 +59,16 @@ public class WordQuizActivity extends AppCompatActivity {
     private char[] answerArr;
     private List<String> correctAnswerList;
     private ImageView[] heart = new ImageView[3];
-    ;
+
     private int heartCnt = 0;
-    ;
+
+    private int leftTime;
+    private int currentTime;
 
     private List<String> userAnswerList;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +90,14 @@ public class WordQuizActivity extends AppCompatActivity {
         buttonNext = findViewById(R.id.buttonNext);
         buttonPrevious = findViewById(R.id.buttonPrevious);
 
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         // Access intent interface and get variables
         Intent intent = getIntent();
-        int level = intent.getIntExtra("level", 1);
+        level = intent.getIntExtra("level", 1);
         seconds = intent.getIntExtra("seconds", 30);
+        gameType = intent.getIntExtra("gameType", 2);
         String string = intent.getStringExtra("string");
 //        String string = null;
 
@@ -154,12 +164,15 @@ public class WordQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stopTimer();
 
+                setIncorrectNoteDB();
+                setRankingDB();
+
                 userAnswerList.add(answerText);
                 if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
                     quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
                 }
 
-                Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
+                Intent i = new Intent(WordQuizActivity.this, WordQuizSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -180,18 +193,23 @@ public class WordQuizActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(seconds * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                textTime.setText(String.valueOf((int) (millisUntilFinished / 1000)));
+                leftTime = (int) (millisUntilFinished / 1000);
+                currentTime = seconds - leftTime;
+                textTime.setText(String.valueOf(leftTime));
             }
 
             @Override
             public void onFinish() {
+
+                setRankingDB();
+                setIncorrectNoteDB();
 
                 userAnswerList.add(answerText);
                 if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
                     quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
                 }
 
-                Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
+                Intent i = new Intent(WordQuizActivity.this, WordQuizSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
                 ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -402,14 +420,18 @@ public class WordQuizActivity extends AppCompatActivity {
         }
         heartCnt++;
         if(heartCnt == 3 ) {
+
             stopTimer();
+
+            setRankingDB();
+            setIncorrectNoteDB();
 
             userAnswerList.add(answerText);
             if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
                 quizList.get(indexCurrentQuestion).userAnswer = quizList.get(indexCurrentQuestion).correctAnswer;
             }
 
-            Intent i = new Intent(WordQuizActivity.this, WordSolutionActivity.class);
+            Intent i = new Intent(WordQuizActivity.this, WordQuizSolutionActivity.class);
             i.putExtra("score", getScore());
             // Change List to ArrayList to accommodate subList
             ArrayList<Quiz> list = new ArrayList<>(quizList);
@@ -428,5 +450,52 @@ public class WordQuizActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void setRankingDB() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("email", auth.getCurrentUser().getEmail());
+        data.put("gameType", String.valueOf(gameType));
+        data.put("level", String.valueOf(level));
+        data.put("score", String.valueOf(getScore()));
+        data.put("time", String.valueOf(currentTime));
+
+        db.collection("RANKING")
+                .add(data)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    public void setIncorrectNoteDB() {
+
+        for(int i = 0; i < quizList.size(); i++) {
+            if(quizList.get(i).correctAnswer != quizList.get(i).userAnswer) {
+                Map<String, Object> data = new HashMap<>();
+                data.put("email", auth.getCurrentUser().getEmail());
+                data.put("imageURL", quizList.get(i).imageUrl);
+                data.put("answer", quizList.get(i).correctAnswer);
+
+                db.collection("INCORRECTNOTE")
+                        .add(data)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }
+        }
     }
 }

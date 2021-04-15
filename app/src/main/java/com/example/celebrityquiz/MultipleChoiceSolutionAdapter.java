@@ -17,12 +17,12 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class SolutionAdapter extends RecyclerView.Adapter {
+public class MultipleChoiceSolutionAdapter extends RecyclerView.Adapter {
     private List<Quiz> quizList;
     private Context context;
 
     // Constructor to initialize all arrayList
-    SolutionAdapter(List<Quiz> quizList, Context context) {
+    MultipleChoiceSolutionAdapter(List<Quiz> quizList, Context context) {
         this.quizList = quizList;
         this.context = context;
     }

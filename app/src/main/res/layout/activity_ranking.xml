@@ -41,7 +41,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/button_white_rounded"
             android:fontFamily="@font/nanumsquarebold"
-            android:text="워드 퀴즈 랭킹"
+            android:text="워드 퀴즈 글로벌 랭킹"
             android:textColor="@color/colorMain" />
 
     </LinearLayout>

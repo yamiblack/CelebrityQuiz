@@ -17,14 +17,14 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class WordSolutionAdapter extends RecyclerView.Adapter {
+public class WordQuizSolutionAdapter extends RecyclerView.Adapter {
     private List<Quiz> quizList;
     private List<String> userAnswerText;
     private List<String> correctAnswer;
     private Context context;
 
     // Constructor to initialize all arrayList
-    WordSolutionAdapter(List<Quiz> quizList, Context context, List<String> userAnswerText, List<String> correctAnswer) {
+    WordQuizSolutionAdapter(List<Quiz> quizList, Context context, List<String> userAnswerText, List<String> correctAnswer) {
         this.quizList = quizList;
         this.userAnswerText = userAnswerText;
         this.context = context;

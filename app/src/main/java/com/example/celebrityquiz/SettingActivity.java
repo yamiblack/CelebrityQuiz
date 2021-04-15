@@ -29,7 +29,7 @@ public class SettingActivity extends AppCompatActivity {
     public int seconds;
     public int gameType;
 
-    Intent intent;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
