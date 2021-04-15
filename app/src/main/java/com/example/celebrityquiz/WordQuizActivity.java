@@ -164,7 +164,7 @@ public class WordQuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stopTimer();
 
-                setIncorrectNoteDB();
+//                setIncorrectNoteDB();
                 setRankingDB();
 
                 userAnswerList.add(answerText);
@@ -202,7 +202,7 @@ public class WordQuizActivity extends AppCompatActivity {
             public void onFinish() {
 
                 setRankingDB();
-                setIncorrectNoteDB();
+//                setIncorrectNoteDB();
 
                 userAnswerList.add(answerText);
                 if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {
@@ -424,7 +424,7 @@ public class WordQuizActivity extends AppCompatActivity {
             stopTimer();
 
             setRankingDB();
-            setIncorrectNoteDB();
+//            setIncorrectNoteDB();
 
             userAnswerList.add(answerText);
             if (answerText.equals(getCurrentAnswer(quizList.get(indexCurrentQuestion)))) {

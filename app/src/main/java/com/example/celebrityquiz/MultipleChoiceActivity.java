@@ -180,7 +180,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 stopTimer();
-                setIncorrectNoteDB();
+//                setIncorrectNoteDB();
                 setRankingDB();
                 Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
@@ -207,7 +207,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 setRankingDB();
-                setIncorrectNoteDB();
+//                setIncorrectNoteDB();
                 Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
                 i.putExtra("score", getScore());
                 // Change List to ArrayList to accommodate subList
@@ -327,7 +327,7 @@ public class MultipleChoiceActivity extends AppCompatActivity {
 
         if (heartCnt == 3) {
             setRankingDB();
-            setIncorrectNoteDB();
+//            setIncorrectNoteDB();
             stopTimer();
             Intent i = new Intent(MultipleChoiceActivity.this, MultipleChoiceSolutionActivity.class);
             i.putExtra("score", getScore());
