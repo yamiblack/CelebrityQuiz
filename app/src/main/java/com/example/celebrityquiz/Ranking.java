@@ -1,7 +1,7 @@
 package com.example.celebrityquiz;
 
 public class Ranking implements Comparable<Ranking> {
-    String Rank;
+    String rank;
     String email;
     String gameType;
     String level;
@@ -9,11 +9,11 @@ public class Ranking implements Comparable<Ranking> {
     String time;
 
     public String getRank() {
-        return Rank;
+        return rank;
     }
 
     public void setRank(String rank) {
-        Rank = rank;
+        rank = rank;
     }
 
     public String getEmail() {
