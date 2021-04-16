@@ -80,6 +80,16 @@
             android:text="게임 설정"
             android:textColor="@color/colorMain" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nanumsquarebold"
+            android:text="게임 시작 전에 게임 설정에서 게임을 먼저 설정을 해주세요."
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
 
     </LinearLayout>
 

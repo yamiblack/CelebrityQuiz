@@ -60,7 +60,8 @@ public class MyPageEasyFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        if (documentSnapshot.get("email").toString().equals(auth.getCurrentUser().getEmail()) && documentSnapshot.get("level").toString().equals("1")) {
+                        if (documentSnapshot.get("email").toString().equals(auth.getCurrentUser().getEmail()) &&
+                                documentSnapshot.get("level").toString().equals("1")) {
 
                             if (Integer.parseInt(documentSnapshot.get("score").toString()) > bestScore) {
                                 bestScore = Integer.parseInt(documentSnapshot.get("score").toString());
