@@ -104,7 +104,7 @@
 
 <p align="center"><img width="300" src="https://user-images.githubusercontent.com/50551349/121324272-88d01300-c94b-11eb-895c-11f00fb9bf7c.jpg"/> </p>
 
--‘My Page’에서는 위 그림과 같이 각 난이도 별로 최고 점수와 평균 점수를 나타낸다. 글로벌 랭킹과 마찬가지로 난이도별 점수를 나타내기 위해서 TabLayout과 ViewPager를 활용했다. 각각에 대한 정보를 나타내기 위해 글로벌 랭킹에서 사용된 Ranking의 Database를 활용했다. 사용자의 이메일과 게임 난이도를 비교하여 올바른 정보를 나타냈다. 
+- ‘My Page’에서는 위 그림과 같이 각 난이도 별로 최고 점수와 평균 점수를 나타낸다. 글로벌 랭킹과 마찬가지로 난이도별 점수를 나타내기 위해서 TabLayout과 ViewPager를 활용했다. 각각에 대한 정보를 나타내기 위해 글로벌 랭킹에서 사용된 Ranking의 Database를 활용했다. 사용자의 이메일과 게임 난이도를 비교하여 올바른 정보를 나타냈다. 
 </br>
 
 ### 12. '효과음' 구현
@@ -122,10 +122,3 @@
 ## 사용 기술 스택
 - Android(Java)
 - Firebase
-
-
-
-
-
-
-
