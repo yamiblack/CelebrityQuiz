@@ -47,16 +47,16 @@
 
 - Firebase 활용 회원가입 및 로그인 화면은 위 그림과 같다.
 
-<p align="center"> <img src="https://user-images.githubusercontent.com/50551349/121321577-2fff7b00-c949-11eb-9c97-f23e9b856cf6.jpg" width="300"/>
- <img src="https://user-images.githubusercontent.com/50551349/121321592-33930200-c949-11eb-9b5a-ed15f60bfee7.jpg" width="300"/> </p>
-
-- 좌측은 로그인 오류 화면을, 우측은 로그인 성공 화면을 나타낸다. 
-
 <p align="center"> 
  <img src="https://user-images.githubusercontent.com/50551349/121321895-794fca80-c949-11eb-8ae7-4ad9a1aae700.jpg" width="300"/>
  <img src="https://user-images.githubusercontent.com/50551349/121321911-7c4abb00-c949-11eb-990a-37a532a3fddd.jpg" width="300"/>  </p>
  
-- 좌측은 회원가입 오류 화면을, 우측은 회원가입 성공 화면을 나타낸다. 
+- 좌측은 회원가입 오류 화면을, 우측은 회원가입 성공 화면을 나타낸다.
+
+<p align="center"> <img src="https://user-images.githubusercontent.com/50551349/121321577-2fff7b00-c949-11eb-9c97-f23e9b856cf6.jpg" width="300"/>
+ <img src="https://user-images.githubusercontent.com/50551349/121321592-33930200-c949-11eb-9b5a-ed15f60bfee7.jpg" width="300"/> </p>
+
+- 좌측은 로그인 오류 화면을, 우측은 로그인 성공 화면을 나타낸다.  
 </br>
 
 ### 6. Firebase 활용 Global Ranking
